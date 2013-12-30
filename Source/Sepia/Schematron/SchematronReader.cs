@@ -470,7 +470,7 @@ namespace Sepia.Schematron
                 ConformanceLevel = ConformanceLevel.Document,
                 IgnoreComments = true,
                 IgnoreProcessingInstructions = true,
-                IgnoreWhitespace = false,
+                IgnoreWhitespace = true, 
                 DtdProcessing = DtdProcessing.Prohibit,
                 ValidationFlags = XmlSchemaValidationFlags.AllowXmlAttributes | XmlSchemaValidationFlags.ReportValidationWarnings | XmlSchemaValidationFlags.ProcessIdentityConstraints,
                 ValidationType = ValidationType.Schema

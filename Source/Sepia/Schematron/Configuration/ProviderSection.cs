@@ -15,7 +15,7 @@ namespace Sepia.Schematron.Configuration
    /// <code>
    /// &lt;configuration>
    ///    &lt;configSections>
-   ///       &lt;section name="<see cref="ProviderFactory{T}.SectionName"/>" type="Sepia.Schematron.Configuration.ProviderSection, BlackHen.Ubl" />
+   ///       &lt;section name="<see cref="ProviderFactory{T}.SectionName"/>" type="Sepia.Schematron.Configuration.ProviderSection, Sepia" />
    ///    &lt;/configSections>
    /// 
    ///    &lt;<see cref="ProviderFactory{T}.SectionName"/> defaultProvider="Sample">

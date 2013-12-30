@@ -380,7 +380,7 @@ namespace Sepia.Schematron
       ///   Gets the compiled form of the <see cref="SchematronDocument"/>.
       /// </summary>
       /// <value>
-      ///   A "minimal syntax" <see cref="SchematronDocument"/>, as specifed in Section 6.2 of ISO/IEC 19757-3.
+      ///   A "minimal syntax" <see cref="SchematronDocument"/>, as specified in Section 6.2 of ISO/IEC 19757-3.
       /// </value>
       /// <seealso cref="Compiler"/>
       public SchematronDocument CompiledDocument

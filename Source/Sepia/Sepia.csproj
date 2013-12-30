@@ -145,18 +145,18 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Schematron\Schematron.cd" />
-    <None Include="Schematron\Schemas\Schematron-1.5.sch" />
-    <None Include="Schematron\Schemas\Schematron-1.6.xsd">
+    <EmbeddedResource Include="Schematron\Schemas\Schematron-1.5.sch" />
+    <EmbeddedResource Include="Schematron\Schemas\Schematron-1.6.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Schematron\Schemas\Schematron-ISO-2006%28E%29.sch" />
-    <None Include="Schematron\Schemas\Schematron-ISO-2006%28E%29.xsd">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Schematron\Schemas\Schematron-ISO-2006%28E%29.sch" />
+    <EmbeddedResource Include="Schematron\Schemas\Schematron-ISO-2006%28E%29.xsd">
       <SubType>Designer</SubType>
-    </None>
+    </EmbeddedResource>
     <None Include="Schematron\Schemas\Schematron-ISO-2006%28E%29.xsx">
       <DependentUpon>Schematron-ISO-2006%28E%29.xsd</DependentUpon>
     </None>
-    <None Include="Schematron\Schemas\Svrl-ISO-2006%28E%29.sch" />
+    <EmbeddedResource Include="Schematron\Schemas\Svrl-ISO-2006%28E%29.sch" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Schematron\Documentation\Rules with XSD.txt" />

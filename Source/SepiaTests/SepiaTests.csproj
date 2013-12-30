@@ -72,6 +72,29 @@
     <Compile Include="Calendaring\Serialization\ComponentTest.cs" />
     <Compile Include="Calendaring\Serialization\ContentLineTest.cs" />
     <Compile Include="Calendaring\VEventTest.cs" />
+    <Compile Include="Schematron\ActivePatternTest.cs" />
+    <Compile Include="Schematron\AnnotationTest.cs" />
+    <Compile Include="Schematron\AssertionTest.cs" />
+    <Compile Include="Schematron\CompilerTest.cs" />
+    <Compile Include="Schematron\DiagnosticTest.cs" />
+    <Compile Include="Schematron\ExsltTest.cs" />
+    <Compile Include="Schematron\ExtendsTest.cs" />
+    <Compile Include="Schematron\LetTest.cs" />
+    <Compile Include="Schematron\NamespaceDefinitionTest.cs" />
+    <Compile Include="Schematron\PatternTest.cs" />
+    <Compile Include="Schematron\PersonXmlComTest.cs" />
+    <Compile Include="Schematron\PhaseTest.cs" />
+    <Compile Include="Schematron\ReportTest.cs" />
+    <Compile Include="Schematron\RuleTest.cs" />
+    <Compile Include="Schematron\SchematronDocumentTest.cs" />
+    <Compile Include="Schematron\SchematronReaderTest.cs" />
+    <Compile Include="Schematron\SchematronSchemasTest.cs" />
+    <Compile Include="Schematron\SchematronTest.cs" />
+    <Compile Include="Schematron\SchematronValidatorTest.cs" />
+    <Compile Include="Schematron\TitleTest.cs" />
+    <Compile Include="Schematron\ValidationReportTest.cs" />
+    <Compile Include="Schematron\XPathHelperTest.cs" />
+    <Compile Include="Schematron\XPathQueryLanguageTest.cs" />
     <Compile Include="TimeRangeTest.cs" />
     <Compile Include="TagBagTest.cs" />
     <Compile Include="TypedTagTest.cs" />
@@ -91,6 +114,31 @@
       <Project>{D2ACB9E6-9ADA-45F3-9CE1-DD5D41CF5934}</Project>
       <Name>Sepia</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schematron\all.nunit" />
+    <None Include="Schematron\all.nunit.config" />
+    <None Include="Schematron\App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schematron\Samples\AbstractPattern.sch" />
+    <None Include="Schematron\Samples\All.sch" />
+    <None Include="Schematron\Samples\AllISO.sch" />
+    <None Include="Schematron\Samples\Arabic.sch" />
+    <None Include="Schematron\Samples\Bad1.sch" />
+    <None Include="Schematron\Samples\Dog.sch" />
+    <None Include="Schematron\Samples\Exslt.sch" />
+    <None Include="Schematron\Samples\Let.sch" />
+    <None Include="Schematron\Samples\Person.Xml.Com.sch" />
+    <None Include="Schematron\Samples\PostalZone.sch" />
+    <None Include="Schematron\Samples\PostalZone.ubl" />
+    <None Include="Schematron\Samples\Schematron-1.5.sch" />
+    <None Include="Schematron\Samples\UBL-ApplicationResponse-2.0.sch" />
+    <None Include="Schematron\Schematron.nunit" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Schematron\SchematronTests.csproj" />
+    <Content Include="Schematron\SchematronTests.csproj.user" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
