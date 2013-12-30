@@ -35,6 +35,8 @@ namespace Sepia.Calendaring
         public void Reading()
         {
             const string ics =
+                "BEGIN:VCALENDAR" + Crlf +
+                    "VERSION:2.0" + Crlf +
                 "BEGIN:VTODO" + Crlf +
                    "UID:20070514T103211Z-123404@example.com" + Crlf +
                    "DTSTAMP:20070514T103211Z" + Crlf +
@@ -45,10 +47,12 @@ namespace Sepia.Calendaring
                    "PRIORITY:1" + Crlf +
                    "CATEGORIES:WORK,IETF" + Crlf +
                    "STATUS:NEEDS-ACTION" + Crlf +
-                "END:VTODO" + Crlf;
+                "END:VTODO" + Crlf +
+                "END:VCALENDAR" + Crlf;
 
-            var todo = new VTodo();
-            todo.ReadIcs(IcsReader.Create(new StringReader(ics)));
+            var calendar = new VCalendar();
+            calendar.ReadIcs(IcsReader.Create(new StringReader(ics)));
+            var todo = calendar.Components.OfType<VTodo>().First();
 
             Assert.AreEqual("20070514T103211Z-123404@example.com", todo.Id);
             Assert.AreEqual(new DateTime(2007, 05, 14, 10, 32, 11, DateTimeKind.Utc), todo.CreatedOnByAgent.Value);
@@ -66,6 +70,8 @@ namespace Sepia.Calendaring
         public void Writing()
         {
             const string ics0 =
+                "BEGIN:VCALENDAR" + Crlf +
+                    "VERSION:2.0" + Crlf +
                 "BEGIN:VTODO" + Crlf +
                    "UID:20070514T103211Z-123404@example.com" + Crlf +
                    "DTSTAMP:20070514T103211Z" + Crlf +
@@ -87,15 +93,18 @@ namespace Sepia.Calendaring
                         "ATTACH;FMTTYPE=application/msword:http://example.com/" + Crlf +
                         " templates/agenda.doc" + Crlf +
                    "END:VALARM" + Crlf +
-                "END:VTODO" + Crlf;
+                "END:VTODO" + Crlf +
+                "END:VCALENDAR" + Crlf;
 
-            var todo0 = new VTodo();
-            todo0.ReadIcs(IcsReader.Create(new StringReader(ics0)));
-            var ics1 = new StringWriter();
-            todo0.WriteIcs(IcsWriter.Create(ics1));
-            var todo = new VTodo();
-            todo.ReadIcs(IcsReader.Create(new StringReader(ics1.ToString())));
+            var calendar0 = new VCalendar();
+            calendar0.ReadIcs(IcsReader.Create(new StringReader(ics0)));
+            var ics = new StringWriter();
+            calendar0.WriteIcs(IcsWriter.Create(ics));
+            Console.WriteLine(ics.ToString());
+            var calendar1 = new VCalendar();
+            calendar1.ReadIcs(IcsReader.Create(new StringReader(ics.ToString())));
 
+            var todo = calendar1.Components.OfType<VTodo>().First();
             Assert.AreEqual("20070514T103211Z-123404@example.com", todo.Id);
             Assert.AreEqual(new DateTime(2007, 05, 14, 10, 32, 11, DateTimeKind.Utc), todo.CreatedOnByAgent.Value);
             Assert.AreEqual(new DateTime(2007, 05, 14, 11, 00, 00, DateTimeKind.Utc), todo.StartsOn.Value.Value);

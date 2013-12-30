@@ -330,6 +330,7 @@ namespace Sepia.Calendaring
             ics.WriteContent("rdate", RecurrenceDates);
             ics.WriteContent(Attachments);
             ics.WriteContent(Relationships);
+            ics.WriteContent(Alarm);
             if (Priority != 0)
                 ics.WriteContent("priority", Priority);
             ics.WriteEndComponent();
