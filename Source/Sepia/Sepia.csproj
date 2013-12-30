@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D2ACB9E6-9ADA-45F3-9CE1-DD5D41CF5934}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sepia</RootNamespace>
+    <AssemblyName>Sepia</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\Sepia.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Caches\SimpleCache.cs" />
+    <Compile Include="Caches\NamespaceDoc.cs" />
+    <Compile Include="Caches\NullCache.cs" />
+    <Compile Include="Calendaring\AccessClassification.cs" />
+    <Compile Include="Calendaring\Attendee.cs" />
+    <Compile Include="Calendaring\Contact.cs" />
+    <Compile Include="Calendaring\AlarmAction.cs" />
+    <Compile Include="Calendaring\CalendarAttachment.cs" />
+    <Compile Include="Calendaring\JournalStatus.cs" />
+    <Compile Include="Calendaring\TodoStatus.cs" />
+    <Compile Include="Calendaring\TimeUsage.cs" />
+    <Compile Include="Calendaring\TimeSlot.cs" />
+    <Compile Include="Calendaring\TriggerEdge.cs" />
+    <Compile Include="Calendaring\Serialization\IcsSerializable.cs" />
+    <Compile Include="Calendaring\VAlarm.cs" />
+    <Compile Include="Calendaring\Relationship.cs" />
+    <Compile Include="Calendaring\ParticipationStatus.cs" />
+    <Compile Include="Calendaring\RelationshipReference.cs" />
+    <Compile Include="Calendaring\UserRole.cs" />
+    <Compile Include="Calendaring\UserType.cs" />
+    <Compile Include="Calendaring\VFreeBusy.cs" />
+    <Compile Include="Calendaring\RequestStatus.cs" />
+    <Compile Include="Calendaring\VEvent.cs" />
+    <Compile Include="Calendaring\Date.cs" />
+    <Compile Include="Calendaring\EventStatus.cs" />
+    <Compile Include="Calendaring\ICalenderComponent.cs" />
+    <Compile Include="Calendaring\NamespaceDoc.cs" />
+    <Compile Include="Calendaring\RecurrenceRule.cs" />
+    <Compile Include="Calendaring\CalendarException.cs" />
+    <Compile Include="Calendaring\SeasonalChange.cs" />
+    <Compile Include="Calendaring\Serialization\IcsReader.cs" />
+    <Compile Include="Calendaring\Serialization\IcsReaderSettings.cs" />
+    <Compile Include="Calendaring\Serialization\IcsWriter.cs" />
+    <Compile Include="Calendaring\Serialization\IcsWriterSettings.cs" />
+    <Compile Include="Calendaring\Serialization\Component.cs" />
+    <Compile Include="Calendaring\Serialization\ContentLine.cs" />
+    <Compile Include="Calendaring\Serialization\ParameterName.cs" />
+    <Compile Include="Calendaring\Serialization\PropertyList.cs" />
+    <Compile Include="Calendaring\Serialization\PropertyName.cs" />
+    <Compile Include="Calendaring\VCalendar.cs" />
+    <Compile Include="Calendaring\VTimeZone.cs" />
+    <Compile Include="Calendaring\VJournal.cs" />
+    <Compile Include="Calendaring\VTodo.cs" />
+    <Compile Include="CircularDependencyException.cs" />
+    <Compile Include="ITag.cs" />
+    <Compile Include="Model\BusinessData.cs" />
+    <Compile Include="Model\NamespaceDoc.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="TagBag.cs" />
+    <Compile Include="TextExtensions.cs" />
+    <Compile Include="Resource.cs" />
+    <Compile Include="IResolvable.cs" />
+    <Compile Include="LanguageTag.cs" />
+    <Compile Include="MultilingualText.cs" />
+    <Compile Include="Tag.cs" />
+    <Compile Include="TimeRange.cs" />
+    <Compile Include="NamespaceDoc.cs" />
+    <Compile Include="TimeExtensions.cs" />
+    <Compile Include="Guard.cs" />
+    <Compile Include="IObjectCache.cs" />
+    <Compile Include="Text.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ObjectCacheExtensions.cs" />
+    <Compile Include="TypedTag.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
