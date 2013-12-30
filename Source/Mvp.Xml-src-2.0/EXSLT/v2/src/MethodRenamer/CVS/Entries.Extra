@@ -1,0 +1,6 @@
+/.cvsignore////*///
+/App.config////*///
+/MethodRenamer.cs////*///
+/MethodRenamer.csproj////*///
+/MethodRenamer.exe.config////*///
+/MethodRenamer.vshost.exe.config////*///

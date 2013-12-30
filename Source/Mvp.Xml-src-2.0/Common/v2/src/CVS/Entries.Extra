@@ -1,0 +1,16 @@
+/.cvsignore////*///
+/AssemblyInfo.cs////*///
+/Common.csproj////*///
+/SR.cs////*///
+/SR.resx////*///
+/XmlBaseAwareXmlTextReader.cs////*///
+/XmlFirstLowerWriter.cs////*///
+/XmlFirstUpperReader.cs////*///
+/XmlFragmentStream.cs////*///
+/XmlNamespaces.cs////*///
+/XmlNodeFactory.cs////*///
+/XmlNodeListFactory.cs////*///
+/XmlPrefix.cs////*///
+/changelog.txt////*///
+D/Serialization///////
+D/XPath///////

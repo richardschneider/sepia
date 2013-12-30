@@ -1,0 +1,11 @@
+/.cvsignore////*///
+/Global.csproj////*///
+/Global.ndoc////*///
+/MethodRenamer.exe////*///
+/MethodRenamer.exe.config////*///
+D/Common///////
+D/EXSLT///////
+D/Properties///////
+D/XInclude///////
+D/XPointer///////
+/Mvp.Xml.sln////*///

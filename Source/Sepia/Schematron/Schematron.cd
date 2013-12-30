@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="Sepia.Schematron.SchematronDocument">
+    <Position X="0.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>SchematronDocument.cs</FileName>
+      <HashCode>AUpAgIECQggAhEIACAQAoBgAAIggAAAAAZAEAAGYRgA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Namespaces" />
+      <Property Name="Phases" />
+      <Property Name="Patterns" />
+      <Property Name="Diagnostics" />
+    </ShowAsCollectionAssociation>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.Diagnostic">
+    <Position X="0.75" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <FileName>Diagnostic.cs</FileName>
+      <HashCode>AAAAAAAAAAAAhAAAAAQAAAAAAAAAAAAAARAAIAEQAiA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.NamespaceDefinition">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>NamespaceDefinition.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAIAgAACAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.Pattern">
+    <Position X="4.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Pattern.cs</FileName>
+      <HashCode>AgAAAAIAQBAAhEAQAAQAgFQAAIAAAAAAAZAAAEGQAgA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Rules" />
+    </ShowAsCollectionAssociation>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.Phase">
+    <Position X="4.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Phase.cs</FileName>
+      <HashCode>AAAAAAAAAAAAhAAAAAQAoBAAAIAAAAAAAZQAAAGQAgA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="ActivePatterns" />
+    </ShowAsCollectionAssociation>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.ActivePattern">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ActivePattern.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAQAIAAEAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.Rule">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Rule.cs</FileName>
+      <HashCode>AAACAAAIAhAAjAAQEIQgABCAJAAAAAQAAZAAAQGQAhA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Extends" />
+      <Property Name="Assertions" />
+    </ShowAsCollectionAssociation>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.Assertion">
+    <Position X="9.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Assertion.cs</FileName>
+      <HashCode>AAAAAAAAAgAAhAIAEIQgABCAIAAAAAAIARAAKAEQAiA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.Report" Collapsed="true">
+    <Position X="9.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sepia.Schematron.Extends">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Extends.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAgA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.Annotation" Collapsed="true">
+    <Position X="3.75" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Annotation.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.SchematronReader" Collapsed="true">
+    <Position X="3.75" Y="9.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>SchematronReader.cs</FileName>
+      <HashCode>EgQmQYAAQggGCgIAEISACBiABAAMMiQJwVAEIAAACgA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.SchematronValidator">
+    <Position X="1" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>SchematronValidator.cs</FileName>
+      <HashCode>CAoAABAgACCAAAAAgAAACBAAAIAAIAAAGIAEgECAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Sepia.Schematron.SchematronWriter" Collapsed="true">
+    <Position X="3.75" Y="10" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>SchematronWriter.cs</FileName>
+      <HashCode>AAImQACAQghCiBECEIWAABiAAABMFiBIwdCEIAAACgA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sepia.Schematron.ValidationReport">
+    <Position X="6.25" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>ValidationReport.cs</FileName>
+      <HashCode>AAoEAAAgACAAAAAAAAAAAAAAAIAIAAAAAAAAAIIAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+</ClassDiagram>

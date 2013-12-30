@@ -1,0 +1,5 @@
+/.cvsignore////*///
+/AssemblyInfo.cs////*///
+/ExsltXPathTest.cs////*///
+/ExsltXPathTest.csproj////*///
+/Makefile////*///

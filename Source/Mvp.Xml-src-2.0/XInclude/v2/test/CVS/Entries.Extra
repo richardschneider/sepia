@@ -1,0 +1,15 @@
+/.cvsignore////*///
+/Elliotte_Rusty_HaroldTests.cs////*///
+/EntryPoint.cs////*///
+/FourThoughtTests.cs////*///
+/LTG_Edinburgh_UnivTests.cs////*///
+/NistTests.cs////*///
+/RedhatTests.cs////*///
+/TestsGen.xslt////*///
+/XIncludeReaderTests.cs////*///
+/XIncludeSyntaxTests.cs////*///
+/generate-tests.cmd////*///
+D/XInclude-Test-Suite///////
+D/results///////
+D/tests///////
+/XIncludeTest.csproj////*///

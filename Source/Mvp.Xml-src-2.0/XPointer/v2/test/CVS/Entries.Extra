@@ -1,0 +1,10 @@
+/.cvsignore////*///
+/EntryPoint.cs////*///
+/XPointerParserTests.cs////*///
+/XPointerReaderTests.cs////*///
+/XPointerTest.csproj////*///
+/changelog.txt////*///
+/northwind.dtd////*///
+/northwind.xml////*///
+/pubNS.xsd////*///
+/pubsNS.xml////*///

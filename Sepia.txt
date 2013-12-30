@@ -15,9 +15,8 @@ A high performance thread safe in-memory cache.
 
 IOC and service locator patterns.
 
-Logging.
 
-What is the pattern for configuration (system paremeters)?
+What is the pattern for configuration (system parameters)?
 
 Lessons Learnt
 --------------
@@ -31,6 +30,7 @@ Lessons Learnt
 - Always write a unit test for a bug.
 - Loosely coupled designs are easier to change.
 - Avoid null collections.  Its better to return an empty collection.
+- Log everything so that when production failures occurs you can determine what is happening.
 
 Conventions
 -----------
@@ -123,3 +123,10 @@ The ExceptionAssert.Throws<Exception> can be use to test that a method throws an
 XML Comments
 ------------
 
+Logging
+-------
+Common Logging is used by Sepia.  This allows the application to select a specific logging implementation at runtime.
+
+Performance Monitoring
+----------------------
+*TODO*

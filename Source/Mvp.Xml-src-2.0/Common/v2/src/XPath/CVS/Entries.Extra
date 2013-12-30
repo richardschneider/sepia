@@ -1,0 +1,10 @@
+/DynamicContext.cs////*///
+/EmptyXPathNodeIterator.cs////*///
+/IHasXPathNavigator.cs////*///
+/IndexingXPathNavigator.cs////*///
+/SingletonXPathNodeIterator.cs////*///
+/SubtreeeXPathNavigator.cs////*///
+/XPathCache.cs////*///
+/XPathIteratorReader.cs////*///
+/XPathNavigatorIterator.cs////*///
+/XPathVariable.cs////*///
