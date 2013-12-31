@@ -57,5 +57,19 @@ namespace Sepia.Schematron.Tests
          SchematronDocument minimal2 = new SchematronDocument();
          minimal2.Load(schematron);
       }
+
+      [TestMethod]
+      public void CompilingAllSamples()
+      {
+          foreach (var x in Directory.EnumerateFiles("Samples", "*.sch", SearchOption.AllDirectories))
+          {
+              Console.WriteLine(x);
+              if (Path.GetFileName(x).StartsWith("Bad"))
+                  continue;
+              var doc = SchematronReader.ReadSchematron(x);
+              new Compiler().Compile(doc);
+          }
+      }
+
    }
 }

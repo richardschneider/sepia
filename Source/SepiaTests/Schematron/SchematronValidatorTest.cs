@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
@@ -152,5 +153,21 @@ namespace Sepia.Schematron
          Console.WriteLine(svrl.ToString());
       }
 
+      [TestMethod]
+      public void ValidateEmptyDocumentWithAllSampleSchematron()
+      {
+          var xml = new XmlDocument();
+          xml.LoadXml("<document />");
+
+          foreach (var name in Directory.EnumerateFiles("Samples", "*.sch", SearchOption.AllDirectories))
+          {
+              Console.WriteLine(name);
+              if (Path.GetFileName(name).StartsWith("Bad"))
+                  continue;
+              var validator = new SchematronValidator(name);
+              validator.Validate(xml);
+          }
+      }
    }
+
 }

@@ -8,9 +8,7 @@ using System.Xml.XPath;
 
 namespace Sepia.Schematron
 {
-    using Sepia.Schematron;
-
-    /// <summary>
+   /// <summary>
    ///   Validates an <see cref="XmlDocument"/> against a <see cref="SchematronDocument"/>.
    /// </summary>
    /// <remarks>
