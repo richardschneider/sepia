@@ -116,8 +116,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Schematron\all.nunit" />
-    <None Include="Schematron\all.nunit.config" />
     <None Include="Schematron\App.config">
       <SubType>Designer</SubType>
     </None>
@@ -134,11 +132,6 @@
     <None Include="Schematron\Samples\PostalZone.ubl" />
     <None Include="Schematron\Samples\Schematron-1.5.sch" />
     <None Include="Schematron\Samples\UBL-ApplicationResponse-2.0.sch" />
-    <None Include="Schematron\Schematron.nunit" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Schematron\SchematronTests.csproj" />
-    <Content Include="Schematron\SchematronTests.csproj.user" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

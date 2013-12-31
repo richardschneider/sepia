@@ -1,6 +1,0 @@
-﻿<NUnitProject>
-  <Settings activeconfig="Debug" />
-  <Config name="Debug" configfile="app.config" binpathtype="Auto">
-    <assembly path="bin\Debug\Sepia.Schematron.Tests.dll" />
-  </Config>
-</NUnitProject>

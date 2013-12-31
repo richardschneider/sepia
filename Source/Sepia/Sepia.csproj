@@ -160,8 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Schematron\Documentation\Rules with XSD.txt" />
-    <Content Include="Schematron\Schematron.csproj" />
-    <Content Include="Schematron\Schematron.csproj.user" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

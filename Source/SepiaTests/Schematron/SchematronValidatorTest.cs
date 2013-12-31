@@ -161,9 +161,11 @@ namespace Sepia.Schematron
 
           foreach (var name in Directory.EnumerateFiles("Samples", "*.sch", SearchOption.AllDirectories))
           {
-              Console.WriteLine(name);
-              if (Path.GetFileName(name).StartsWith("Bad"))
+              // Current schematron can not validate old schematron.
+              if (Path.GetFileName(name).StartsWith("Bad") || "Schematron-1.5.sch" == Path.GetFileName(name))
                   continue;
+
+              Console.WriteLine(name);
               var validator = new SchematronValidator(name);
               validator.Validate(xml);
           }
