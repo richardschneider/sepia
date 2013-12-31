@@ -90,7 +90,7 @@ namespace Sepia.Schematron.Configuration
       ///   Forces the <see cref="Providers"/> to be re-initialised.
       /// </summary>
       /// <remarks>
-      ///   Derived classes that <c>override</c> this method must always enventually call this method.
+      ///   Derived classes that <c>override</c> this method must always eventually call this method.
       /// </remarks>
       protected virtual void LoadProviders()
       {
@@ -125,7 +125,7 @@ namespace Sepia.Schematron.Configuration
       /// <remarks>
       ///   Sets the <see cref="IProvider.Name"/> and <see cref="IProvider.Description"/> properties of the <paramref name="provider"/> and
       ///   <see cref="IProvider.Initialize">initialises</see> it with the <paramref name="settings"/>.
-      ///   Derived classes that <c>override</c> this method must always enventually call this method.
+      ///   Derived classes that <c>override</c> this method must always eventually call this method.
       /// </remarks>
       protected virtual void InitialiseProvider(Feature provider, ProviderSettings settings)
       {
@@ -138,10 +138,10 @@ namespace Sepia.Schematron.Configuration
       ///   Creates a provider with the given type name.
       /// </summary>
       /// <param name="typeString">
-      ///   A comma seperated list containing the full name of the type and the assembly to find it.
+      ///   A comma separated list containing the full name of the type and the assembly to find it.
       /// </param>
       /// <returns>
-      ///   A newly created object then implments <typeparamref name="Feature"/>.
+      ///   A newly created object then implements <typeparamref name="Feature"/>.
       /// </returns>
       protected virtual Feature CreateInstance(string typeString)
       {
