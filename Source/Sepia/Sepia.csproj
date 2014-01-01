@@ -110,6 +110,8 @@
     <Compile Include="Schematron\NamespaceDefinition.cs" />
     <Compile Include="Schematron\Pattern.cs" />
     <Compile Include="Schematron\Phase.cs" />
+    <Compile Include="Schematron\Queries\Xslt2QueryLanguage.cs" />
+    <Compile Include="Schematron\Queries\XPath2QueryLanguage.cs" />
     <Compile Include="Schematron\Queries\ExsltQueryLanguage.cs" />
     <Compile Include="Schematron\Queries\IQueryLanguage.cs" />
     <Compile Include="Schematron\Queries\QueryLanguageFactory.cs" />

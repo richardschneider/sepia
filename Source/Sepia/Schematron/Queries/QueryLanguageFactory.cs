@@ -20,7 +20,7 @@ namespace Sepia.Schematron.Queries
    /// &lt;configuration>
    ///   &lt;configSections>
    ///     &lt;sectionGroup name="schematron">
-   ///       &lt;section name="queryLanguages" type="Sepia.Schematron.Configuration.ProviderSection, BlackHen" />
+   ///       &lt;section name="queryLanguages" type="Sepia.Schematron.Configuration.ProviderSection, Sepia" />
    ///     &lt;/sectionGroup>
    ///   &lt;/configSections>
    /// 
@@ -66,6 +66,10 @@ namespace Sepia.Schematron.Queries
             Providers.Add("xslt", new XsltQueryLanguage());
          if (!Providers.ContainsKey("exslt"))
             Providers.Add("exslt", new ExsltQueryLanguage());
+         if (!Providers.ContainsKey("xpath2"))
+             Providers.Add("xpath2", new XPath2QueryLanguage());
+         if (!Providers.ContainsKey("xslt2"))
+             Providers.Add("xslt2", new Xslt2QueryLanguage());
       }
    }
 }

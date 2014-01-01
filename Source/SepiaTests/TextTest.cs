@@ -77,7 +77,7 @@ namespace Sepia
             var a = new Text("en", "hello world");
             var b = new Text("en", "hello world");
             var c = new Text("en-AU", "g'day mate");
-
+#pragma warning disable 1718
             Assert.IsTrue(a == a);
             Assert.IsTrue(a == b);
             Assert.IsFalse(a == c);
@@ -89,6 +89,7 @@ namespace Sepia
             Assert.IsFalse(c == a);
             Assert.IsFalse(c == b);
             Assert.IsTrue(c == c);
+#pragma warning restore 1718
         }
 
         /// <summary>
@@ -101,6 +102,7 @@ namespace Sepia
             var b = new Text("en", "hello world");
             var c = new Text("en-AU", "g'day mate");
 
+#pragma warning disable 1718
             Assert.IsFalse(a != a);
             Assert.IsFalse(a != b);
             Assert.IsTrue(a != c);
@@ -112,6 +114,7 @@ namespace Sepia
             Assert.IsTrue(c != a);
             Assert.IsTrue(c != b);
             Assert.IsFalse(c != c);
+#pragma warning restore 1718
         }
 
         /// <summary>
