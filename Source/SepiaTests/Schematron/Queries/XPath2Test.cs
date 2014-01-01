@@ -10,6 +10,10 @@ namespace Sepia.Schematron.Queries
     [TestClass]
     public class XPath2Test
     {
+        public virtual IQueryLanguage QueryLanguage
+        {
+            get { return new XPath2QueryLanguage(); }
+        }
 
         [TestMethod]
         public void Exists()
@@ -17,7 +21,7 @@ namespace Sepia.Schematron.Queries
             XmlDocument doc = new XmlDocument();
             doc.LoadXml("<foo><a/></foo>");
             XPathNavigator nav = doc.DocumentElement.CreateNavigator();
-            var query = new XPath2QueryLanguage();
+            var query = QueryLanguage;
             var context = query.CreateMatchContext(null, doc);
 
             var assert = new Assertion { Test = "exists(/foo)" };

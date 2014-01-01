@@ -25,7 +25,7 @@ namespace Sepia.Schematron.Queries
             return new Xslt2Context();
         }
 
-        internal class Xslt2Context : XPath2QueryLanguage.QueryContext
+        internal class Xslt2Context : XPath2QueryLanguage.XPath2Context
         {
             Dictionary<string, IXsltContextFunction> functions = new Dictionary<string, IXsltContextFunction>
             {

@@ -87,6 +87,7 @@
     <Compile Include="Schematron\AssertionTest.cs" />
     <Compile Include="Schematron\CompilerTest.cs" />
     <Compile Include="Schematron\DiagnosticTest.cs" />
+    <Compile Include="Schematron\Queries\Xslt2Test.cs" />
     <Compile Include="Schematron\Queries\XPath2Test.cs" />
     <Compile Include="Schematron\Queries\ExsltTest.cs" />
     <Compile Include="Schematron\ExtendsTest.cs" />
