@@ -30,17 +30,13 @@ namespace Sepia.Schematron.Queries
 
          public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
          {
-            if (log.IsDebugEnabled)
-               log.Debug(String.Format("Resolving function {0}:{1}", prefix, name));
-
             if (string.IsNullOrEmpty(prefix))
             {
                if (name == "current" && argTypes.Length == 0)
                   return currentFunction;
             }
 
-            log.Error(String.Format("'{0}:{1}' is not defined as a function.", prefix, name));
-            return null;
+            return base.ResolveFunction(prefix, name, argTypes);
          }
 
          class CurrentFunction : IXsltContextFunction

@@ -170,6 +170,24 @@ namespace Sepia.Schematron
               validator.Validate(xml);
           }
       }
+
+      [TestMethod]
+      public void IgnoreXpathErrors()
+      {
+          XmlDocument dogs = new XmlDocument();
+          dogs.LoadXml(@"
+<dogs>
+  <dog petname='spot'><nose/><ear/><bone/><ear/></dog>
+  <dog petname='hungry'><nose/><ear/><ear/></dog>
+  <dog petname='smelly'><ear/><bone/><ear/></dog>
+</dogs>");
+          StringBuilder svrl = new StringBuilder();
+          SchematronValidator validator = new SchematronValidator("Samples/DogXPathError.sch") { IgnoreQueryExpressionErrrors = true };
+          ValidationReport report = new ValidationReport(validator, svrl);
+          validator.Validate(dogs);
+          Assert.IsTrue(report.HasValidationErrors);
+      }
+
    }
 
 }

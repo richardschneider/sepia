@@ -156,7 +156,7 @@ namespace Sepia.Schematron
       ///   The id of the <see cref="Phase"/> used for validation.  The default value is <see cref="Phase.Default"/>.
       /// </value>
       /// <remarks>
-      ///   If schema does not specified a <see cref="SchematronDocument.DefaultPhase"/> then all <see cref="SchematronDocument.Patterns"/>
+      ///   If the schema does not specified a <see cref="SchematronDocument.DefaultPhase"/> then all <see cref="SchematronDocument.Patterns"/>
       ///   are used for validation.
       /// <para>
       ///   The "#ALL" can be used to specified all patterns in the schematron document.
@@ -169,6 +169,16 @@ namespace Sepia.Schematron
          get { return phase; }
          set { phase = value; }
       }
+
+      /// <summary>
+      ///  Determines if query expressions errors are ignore or not. 
+      /// </summary>
+      /// <value>
+      ///   When <b>true</b> errors in the <see cref="Rule.Context">rule</see> or <see cref="Assertion.Test">assertion</see>
+      ///   are ignored.
+      ///   The default is value <b>false</b>.
+      /// </value>
+      public bool IgnoreQueryExpressionErrrors { get; set; }
 
       /// <summary>
       ///   Validates the <see cref="XmlDocument"/>
@@ -326,11 +336,21 @@ namespace Sepia.Schematron
             }
 
             // Perform the match
-            bool matches = queryEngine.Match(rule, queryContext, instanceNavigator);
-            if (!matches)
+            try
             {
-               queryEngine.PopScope(queryContext);
-               continue;
+                bool matches = queryEngine.Match(rule, queryContext, instanceNavigator);
+                if (!matches)
+                {
+                    queryEngine.PopScope(queryContext);
+                    continue;
+                }
+            }
+            catch (XPathException e)
+            {
+                log.Warn(string.Format("The query expression '{0}' is invalid. {1}", rule.Context, e.Message));
+                if (!IgnoreQueryExpressionErrrors)
+                    throw;
+                continue; // Ignore the error.
             }
 
             // Fire the rule and run the tests.
@@ -341,15 +361,25 @@ namespace Sepia.Schematron
 
             foreach (Assertion assertion in rule.Assertions)
             {
-               bool q = queryEngine.Assert(assertion, queryContext, instanceNavigator);
-               if (q && log.IsDebugEnabled)
-                  log.Debug(String.Format("Test '{0}' succeeds", assertion.Test));
-               else if (!q)
-               {
-                  OnValidationEvent(new SchematronValidationEventArgs(schematron, queryEngine, pattern, rule, assertion, queryContext, instanceNavigator));
-                  ok = false;
-                  break;
-               }
+                try
+                {
+                    bool q = queryEngine.Assert(assertion, queryContext, instanceNavigator);
+                    if (q && log.IsDebugEnabled)
+                        log.Debug(String.Format("Test '{0}' succeeds", assertion.Test));
+                    else if (!q)
+                    {
+                        OnValidationEvent(new SchematronValidationEventArgs(schematron, queryEngine, pattern, rule, assertion, queryContext, instanceNavigator));
+                        ok = false;
+                        break;
+                    }
+                }
+                catch (XPathException e)
+                {
+                    log.Warn(string.Format("The query expression '{0}' is invalid. {1}", assertion.Test, e.Message));
+                    if (!IgnoreQueryExpressionErrrors)
+                        throw;
+                    // Ignore the error.
+                }
             }
 
             queryEngine.PopScope(queryContext);
