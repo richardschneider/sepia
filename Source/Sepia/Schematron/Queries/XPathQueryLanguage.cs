@@ -109,41 +109,44 @@ namespace Sepia.Schematron.Queries
          if (instance == null)
             throw new ArgumentNullException("instance");
 
-         QueryContext qcontext = (QueryContext)context;
-         XPathExpression expression = (XPathExpression)rule.QueryExpression;
-
-         // Compile the expression if not yet done.
-         if (expression == null)
+         lock (rule)
          {
-            // Microsoft XPath, not sure about Mono, does not like a variable expression on a match!
-            string ruleContext = rule.Context.Trim();
-            if (ruleContext.StartsWith("$"))
-            {
-               Variable variable = qcontext.variables.Find(ruleContext.Remove(0, 1));
-               if (variable == null)
-                  throw new ArgumentException(String.Format("'{0}' is not defined.", ruleContext.Remove(0, 1)));
-               expression = XPathExpression.Compile(variable.value);
+             QueryContext qcontext = (QueryContext)context;
+             XPathExpression expression = (XPathExpression)rule.QueryExpression;
 
-               if (log.IsDebugEnabled)
-                  log.Debug("Binding context " + ruleContext + " to " + variable.value);
-            }
-            else
-            {
-               if (log.IsDebugEnabled)
-                  log.Debug("Compiling context " + ruleContext);
+             // Compile the expression if not yet done.
+             if (expression == null)
+             {
+                 // Microsoft XPath, not sure about Mono, does not like a variable expression on a match!
+                 string ruleContext = rule.Context.Trim();
+                 if (ruleContext.StartsWith("$"))
+                 {
+                     Variable variable = qcontext.variables.Find(ruleContext.Remove(0, 1));
+                     if (variable == null)
+                         throw new ArgumentException(String.Format("'{0}' is not defined.", ruleContext.Remove(0, 1)));
+                     expression = XPathExpression.Compile(variable.value);
 
-               expression = XPathExpression.Compile(ruleContext);
-               rule.QueryExpression = expression;
-            }
+                     if (log.IsDebugEnabled)
+                         log.Debug("Binding context " + ruleContext + " to " + variable.value);
+                 }
+                 else
+                 {
+                     if (log.IsDebugEnabled)
+                         log.Debug("Compiling context " + ruleContext);
+
+                     expression = XPathExpression.Compile(ruleContext);
+                     rule.QueryExpression = expression;
+                 }
+             }
+
+             // Do the match.
+             expression.SetContext(qcontext);
+             bool q = instance.Matches(expression);
+             if (q)
+                 qcontext.current = instance.Select(current);
+
+             return q;
          }
-
-         // Do the match.
-         expression.SetContext(qcontext);
-         bool q = instance.Matches(expression);
-         if (q)
-            qcontext.current = instance.Select(current);
-
-         return q;
       }
 
       /// <summary>
@@ -164,37 +167,41 @@ namespace Sepia.Schematron.Queries
          if (instance == null)
             throw new ArgumentNullException("instance");
 
-         if (assertion.QueryExpression == null)
-         {
-            if (log.IsDebugEnabled)
-               log.Debug("Compiling test " + assertion.Test);
-
-            XPathExpression expr = XPathExpression.Compile(assertion.Test);
-            assertion.QueryExpression = expr;
-         }
-
-         XPathExpression expression = (XPathExpression)assertion.QueryExpression;
-         expression.SetContext((QueryContext)context);
-         bool isReport = assertion is Report;
-         object result = instance.Evaluate(expression);
+         object result;
          bool ok = false;
-         switch (expression.ReturnType)
+         lock (assertion)
          {
-            case XPathResultType.Boolean:
-               ok = (bool)result;
-               break;
-            case XPathResultType.NodeSet:
-               ok = ((XPathNodeIterator)result).Count != 0;
-               break;
-            case XPathResultType.Number:
-               ok = ((double)result) != 0.0;
-               break;
-            case XPathResultType.String:
-               ok = XmlConvert.ToBoolean((string)result); // Check XPATH spec for compliance of casting string to bool
-               break;
-            default:
-               throw new NotSupportedException();
+             XPathExpression expression = assertion.QueryExpression as XPathExpression;
+             if (expression == null)
+             {
+                 if (log.IsDebugEnabled)
+                     log.Debug("Compiling test " + assertion.Test);
+
+                 expression = XPathExpression.Compile(assertion.Test);
+                 assertion.QueryExpression = expression;
+             }
+             expression.SetContext((QueryContext)context);
+             result = instance.Evaluate(expression);
+             switch (expression.ReturnType)
+             {
+                 case XPathResultType.Boolean:
+                     ok = (bool)result;
+                     break;
+                 case XPathResultType.NodeSet:
+                     ok = ((XPathNodeIterator)result).Count != 0;
+                     break;
+                 case XPathResultType.Number:
+                     ok = ((double)result) != 0.0;
+                     break;
+                 case XPathResultType.String:
+                     ok = XmlConvert.ToBoolean((string)result); // Check XPATH spec for compliance of casting string to bool
+                     break;
+                 default:
+                     throw new NotSupportedException();
+             }
          }
+
+         bool isReport = assertion is Report;
          if (isReport && ok)
             return false;
          if (!isReport && !ok)
