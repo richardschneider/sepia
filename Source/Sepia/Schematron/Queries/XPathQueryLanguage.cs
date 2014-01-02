@@ -15,7 +15,7 @@ namespace Sepia.Schematron.Queries
    ///   <b>XPathQueryLanguage</b> supports the XML Path Language (XPath) Version 1.0 (W3C Recommendation 16 November 1999) at 
    ///   <see href="www.w3.org/TR/xpath">www.w3.org/TR/xpath</see>.
    /// </remarks>
-   public class XPathQueryLanguage : IQueryLanguage // TODO: XSLT and XPath query language.  XSLT has more functions.
+   public class XPathQueryLanguage : IQueryLanguage
    {
       private static ILog log = LogManager.GetLogger(typeof(XPathQueryLanguage));
 
@@ -25,20 +25,8 @@ namespace Sepia.Schematron.Queries
 
       #region IQueryLanguage Members
 
-      /// <summary>
-      ///   Creates a context for matching a <see cref="Rule"/> using the specified <see cref="SchematronDocument">Schematron schema</see>
-      ///   and <see cref="XmlDocument"/>.
-      /// </summary>
-      /// <param name="schematronSchema">
-      ///   The <see cref="SchematronDocument"/> that supplies the rules. 
-      /// </param>
-      /// <param name="instance">
-      ///   The <see cref="XmlDocument"/> instance to <see cref="Match"/>.
-      /// </param>
-      /// <returns>
-      ///   A query language specific context.
-      /// </returns>
-      public object CreateMatchContext(SchematronDocument schematronSchema, XmlDocument instance)
+      /// <inheritdoc />
+      public object CreateMatchContext(SchematronDocument schematronSchema, IXPathNavigable instance)
       {
          if (instance == null)
             throw new ArgumentNullException("instance");

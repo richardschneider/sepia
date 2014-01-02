@@ -2,7 +2,6 @@ using Sepia.Schematron.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Xml;
 using System.Xml.XPath;
 
 namespace Sepia.Schematron.Queries
@@ -11,24 +10,25 @@ namespace Sepia.Schematron.Queries
    ///   A Schematron Query Language.
    /// </summary>
    /// <remarks>
-   ///   A Schematron Query Language provides the implementation for the expressions used in a <see cref="Rule"/> and an <see cref="Assertion"/>.
+   ///   A Schematron Query Language provides the implementation for the query expressions used in a <see cref="Rule"/> and 
+   ///   an <see cref="Assertion"/>.
    /// </remarks>
    public interface IQueryLanguage : IProvider
    {
       /// <summary>
       ///   Creates a context for matching a <see cref="Rule"/> using the specified <see cref="SchematronDocument">Schematron schema</see>
-      ///   and <see cref="XmlDocument"/>.
+      ///   and XML document.
       /// </summary>
       /// <param name="schematronSchema">
       ///   The <see cref="SchematronDocument"/> that supplies the rules. 
       /// </param>
       /// <param name="instance">
-      ///   The <see cref="XmlDocument"/> instance to <see cref="Match"/>.
+      ///   The <see cref="IXPathNavigable">XML document</see> to <see cref="Match"/>.
       /// </param>
       /// <returns>
       ///   A query language specific context.
       /// </returns>
-      object CreateMatchContext(SchematronDocument schematronSchema, XmlDocument instance);
+       object CreateMatchContext(SchematronDocument schematronSchema, IXPathNavigable instance);
 
       /// <summary>
       ///   Assigns a value to a variable.

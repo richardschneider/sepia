@@ -154,6 +154,18 @@ namespace Sepia.Schematron
       }
 
       [TestMethod]
+      public void PostalZoneWithXPath()
+      {
+          SchematronValidator validator = new SchematronValidator("Samples/PostalZone.sch");
+          XPathDocument instance = new XPathDocument("Samples/PostalZone.ubl");
+          StringBuilder svrl = new StringBuilder();
+          ValidationReport report = new ValidationReport(validator, svrl);
+          validator.Validate(instance);
+          Console.WriteLine(svrl.ToString());
+          Assert.IsFalse(report.HasValidationErrors);
+      }
+
+       [TestMethod]
       public void ValidateEmptyDocumentWithAllSampleSchematron()
       {
           var xml = new XmlDocument();

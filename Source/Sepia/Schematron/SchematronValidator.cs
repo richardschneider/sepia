@@ -181,26 +181,11 @@ namespace Sepia.Schematron
       public bool IgnoreQueryExpressionErrrors { get; set; }
 
       /// <summary>
-      ///   Validates the <see cref="XmlDocument"/>
+      ///   Validates an XML document against the <see cref="SchemaDocument"/>.
       /// </summary>
-      /// <param name="instance">The <see cref="XmlDocument"/> to validate.</param>
-      /// <remarks>
-      ///   <b>Validate</b> validates the <paramref name="instance"/> against the <see cref="SchemaDocument"/>.  
-      /// <para>
-      ///   If an error is detected and
-      ///   the <see cref="AssertionFailed"/> event is <b>null</b>, then a <see cref="SchematronValidationException"/>is <c>thrown</c>.
-      ///   Otherwise, the <see cref="AssertionFailed"/> event is raised.
-      /// </para>
-      /// </remarks>
-      public void Validate(XmlDocument instance)
-      {
-         Validate(instance, null);
-      }
-
-      /// <summary>
-      ///   Validates the <see cref="XmlDocument"/>
-      /// </summary>
-      /// <param name="instance">The <see cref="XmlDocument"/> to validate.</param>
+      /// <param name="instance">
+      ///   The <see cref="IXPathNavigable">XML document</see> to validate.
+      /// </param>
       /// <param name="handler">A <see cref="SchematronValidationEventHandler"/> to receive errors.</param>
       /// <remarks>
       ///   <b>Validate</b> validates the <paramref name="instance"/> against the <see cref="SchemaDocument"/>.  
@@ -210,7 +195,7 @@ namespace Sepia.Schematron
       ///   Otherwise, the <see cref="AssertionFailed"/> event is raised.
       /// </para>
       /// </remarks>
-      public void Validate(XmlDocument instance, SchematronValidationEventHandler handler)
+      public void Validate(IXPathNavigable instance, SchematronValidationEventHandler handler = null)
       {
          if (instance == null)
             throw new ArgumentNullException("instance");
@@ -222,15 +207,15 @@ namespace Sepia.Schematron
          if (handler != null)
             AssertionFailed += handler;
 
-        if (log.IsInfoEnabled && !string.IsNullOrEmpty(instance.BaseURI))
-            log.Info("Validating " + instance.BaseURI);
+         instanceNavigator = instance.CreateNavigator();
+         if (log.IsInfoEnabled)
+             log.Info(string.Format("Validating '{0}'", instanceNavigator.BaseURI ?? "some XML document"));
 
          // Bind to the query language.
          if (!Schematron.Default.QueryLanguages.Providers.ContainsKey(schematron.QueryLanguage))
             throw new InvalidOperationException(String.Format("'{0}' is an unknown query language.", schematron.QueryLanguage));
          queryEngine = Schematron.Default.QueryLanguages.Providers[schematron.QueryLanguage];
          queryContext = queryEngine.CreateMatchContext(schematron, instance);
-         instanceNavigator = instance.CreateNavigator();
 
          // Apply the schema parameters.
          if (schematron.HasParameters)
@@ -286,7 +271,7 @@ namespace Sepia.Schematron
             foreach (Pattern pattern in activePatterns)
             {
                if (log.IsInfoEnabled)
-                  log.Info("Running pattern " + pattern.Title.ToString());
+                  log.Info(string.Format("Running pattern '{0}'", pattern.Title.ToString()));
                if (ActivePattern != null)
                   ActivePattern(this, new SchematronValidationEventArgs(schematron, queryEngine, pattern, null, null, queryContext, instanceNavigator));
 
@@ -403,8 +388,8 @@ namespace Sepia.Schematron
 
       void OnValidationEvent(SchematronValidationEventArgs e)
       {
-         if (log.IsErrorEnabled)
-            log.Error(String.Format("Test '{0}' fails at {1}", e.Assertion.Test, XPathHelper.FullName(e.Instance)));
+         if (log.IsDebugEnabled)
+            log.Debug(String.Format("Test '{0}' fails at {1}", e.Assertion.Test, XPathHelper.FullName(e.Instance)));
 
          if (AssertionFailed != null)
             AssertionFailed(this, e);
