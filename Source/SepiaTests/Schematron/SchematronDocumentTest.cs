@@ -42,6 +42,12 @@ namespace Sepia.Schematron.Tests
          Assert.AreEqual("see", doc.See);
       }
 
+      [TestMethod]
+      public void CompileAllQueryExpressions()
+      {
+          var doc = Load("Samples/fhir-atom-modified.sch");
+          doc.CompileQueryExpressions();
+      }
 
    }
 }

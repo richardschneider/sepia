@@ -397,6 +397,63 @@ namespace Sepia.Schematron
          }
       }
 
+      /// <summary>
+      ///  Compile all the query expressions in the rules. 
+      /// </summary>
+      /// <remarks>
+      ///   For efficiency, query expressions are JITed (compiled when needed).  This method will compile all query expressions immediately.  This
+      ///   can be used to verify that all query expressions are valid.
+      /// </remarks>
+      public void CompileQueryExpressions()
+      {
+          var schematron = this.CompiledDocument;
+          var instance = new XmlDocument();
+          instance.LoadXml("<empty/>");
+
+          // Bind to the query language.
+          if (!Schematron.Default.QueryLanguages.Providers.ContainsKey(schematron.QueryLanguage))
+              throw new InvalidOperationException(String.Format("'{0}' is an unknown query language.", schematron.QueryLanguage));
+          var queryEngine = Schematron.Default.QueryLanguages.Providers[schematron.QueryLanguage];
+          var queryContext = queryEngine.CreateMatchContext(schematron, instance);
+          var instanceNavigator = instance.CreateNavigator();
+
+          foreach (var pattern in schematron.Patterns)
+          {
+              queryEngine.PushScope(queryContext);
+
+              if (pattern.HasParameters)
+              {
+                  foreach (string name in pattern.Parameters)
+                  {
+                      queryEngine.Let(queryContext, name, pattern.Parameters[name]);
+                  }
+              }
+              foreach (Rule rule in pattern.Rules)
+              {
+                  if (rule.IsAbstract)
+                      continue;
+
+                  queryEngine.PushScope(queryContext);
+                  if (rule.HasParameters)
+                  {
+                      foreach (string name in rule.Parameters)
+                      {
+                          queryEngine.Let(queryContext, name, rule.Parameters[name]);
+                      }
+                  }
+                  queryEngine.Match(rule, queryContext, instanceNavigator);
+                  foreach (Assertion assertion in rule.Assertions)
+                  {
+                      queryEngine.Assert(assertion, queryContext, instanceNavigator);
+                  }
+                  queryEngine.PopScope(queryContext);
+              }
+
+              queryEngine.PopScope(queryContext);
+          }
+
+      }
+
       #region Saving
       /// <summary>
       ///   Saves the <see cref="SchematronDocument"/> to the specified path.

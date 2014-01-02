@@ -138,8 +138,10 @@
     <None Include="Schematron\Samples\AllISO.sch" />
     <None Include="Schematron\Samples\Arabic.sch" />
     <None Include="Schematron\Samples\Bad1.sch" />
+    <None Include="Schematron\Samples\fhir-atom-modified.sch" />
     <None Include="Schematron\Samples\Dog.sch" />
     <None Include="Schematron\Samples\Exslt.sch" />
+    <None Include="Schematron\Samples\fhir-atom.sch" />
     <None Include="Schematron\Samples\Let.sch" />
     <None Include="Schematron\Samples\Person.Xml.Com.sch" />
     <None Include="Schematron\Samples\PostalZone.sch" />

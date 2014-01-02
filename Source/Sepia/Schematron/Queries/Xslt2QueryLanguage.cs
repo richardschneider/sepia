@@ -34,9 +34,6 @@ namespace Sepia.Schematron.Queries
 
             public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
             {
-                if (log.IsDebugEnabled)
-                    log.Debug(String.Format("Resolving function {0}:{1}", prefix, name));
-
                 IXsltContextFunction function = null;
                 if (string.IsNullOrEmpty(prefix))
                     functions.TryGetValue(name, out function);
