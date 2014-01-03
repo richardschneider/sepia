@@ -340,7 +340,7 @@ namespace Sepia.Schematron
 
             // Fire the rule and run the tests.
             if (log.IsDebugEnabled)
-               log.Debug("Fired rule " + rule.Context);
+               log.Debug(string.Format("Fired rule '{0}' on node '{1}'.", rule.Context, XPathHelper.FullName(instanceNavigator)));
             if (RuleFired != null)
                RuleFired(this, new SchematronValidationEventArgs(schematron, queryEngine, pattern, rule, null, queryContext, instanceNavigator));
 
@@ -355,7 +355,6 @@ namespace Sepia.Schematron
                     {
                         OnValidationEvent(new SchematronValidationEventArgs(schematron, queryEngine, pattern, rule, assertion, queryContext, instanceNavigator));
                         ok = false;
-                        break;
                     }
                 }
                 catch (XPathException e)

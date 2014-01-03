@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
@@ -200,6 +201,34 @@ namespace Sepia.Schematron
           Assert.IsTrue(report.HasValidationErrors);
       }
 
+      /// <summary>
+      ///   Issue was that not all assertions were run on a fired rule.
+      /// </summary>
+      [TestMethod]
+      public void Bug1()
+      {
+          var patient = new XPathDocument(new StringReader(@"
+<Patient id='84568-4564' xmlns='http://hl7.org/fhir'>
+  <identifier>
+    <system value='urn:ohcp' />
+    <value value='84568-4564' />
+  </identifier>
+  <name>
+    <family value='Alpha' />
+  </name>
+  <name>
+    <family value='Beta' />
+  </name>
+  <deceasedBoolean value='true' />
+  <contact>
+  </contact>
+ </Patient>"));
+          var errors = new List<string>();
+          new SchematronValidator("Samples/HisPatient1.sch")
+            .Validate(patient, (s, e) => errors.Add(e.Message));
+          Assert.IsTrue(errors.Any(e => e == "Only one name is allowed."), "missing name issue");
+          Assert.IsTrue(errors.Any(e => e == "A date of death is required, not just a death indication."), "missing dod issue");
+      }
    }
 
 }
