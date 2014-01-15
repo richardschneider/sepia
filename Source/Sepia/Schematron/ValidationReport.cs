@@ -8,7 +8,7 @@ namespace Sepia.Schematron
 {
    /// <summary>
    /// The Schematron Validation Report Language (SVRL) is a simple XML language used for reporting the
-   /// results of <see cref="SchematronValidator"/>.
+   /// results of the <see cref="SchematronValidator"/>.
    /// </summary>
    /// <remarks>
    ///   <b>ValidationReport</b> monitors the execution of a <see cref="SchematronValidator"/> and records

@@ -201,7 +201,7 @@ namespace Sepia
         /// 
         ///   <code title="Dividing a Time Range" source="SepiaExamples\TimeRangeExample.cs" region="Dividing" language="C#" />
         /// </example>
-        public IEnumerable<TimeRange> Divide(TimeSpan step)
+        public IEnumerable<TimeRange> Divide(TimeSpan step)  // TODO: maybe rename to split
         {
             Guard.Check(step > TimeSpan.Zero, "step", "Cannot step by a zero or negative number.");
 
@@ -248,7 +248,7 @@ namespace Sepia
         /// 
         ///   <code title="Subtracting a Time Range" source="SepiaExamples\TimeRangeExample.cs" region="SubtractCollection" language="C#" />
         /// </example>
-        public IEnumerable<TimeRange> Subtract(TimeRange other)
+        public IEnumerable<TimeRange> Subtract(TimeRange other)  // TODO: maybe rename to Remove
         {
             if (other.StartsOn <= this.StartsOn && other.EndsOn >= this.EndsOn)
                 yield break;
@@ -367,6 +367,59 @@ namespace Sepia
             }
 
             return new TimeRange(start, end);
+        }
+
+        /// <summary>
+        ///   Determines the upper exclusive bound for a partial date or date/date.
+        /// </summary>
+        /// <param name="partial">
+        ///   A valid ISO 8061 partial date/time, such as "2012-01-14", "20120114T10".
+        /// </param>
+        /// <returns>
+        ///   A <see cref="TimeRange"/> with <see cref="TimeRange.EndsOn"/> being the next step for
+        ///   the partial date/time.
+        /// </returns>
+        /// <remarks>
+        ///   The precision of the partial date/time is determined and then the upper bound is calculated.  For example,
+        ///   "2012" has upper bound of "2013" and "2012-01-14" has upper bound of "2012-01-15".  Precision is down to
+        ///   seconds.  All valid ISO forms (2012-01-14T10 or 20120114T10) are allowed.
+        /// </remarks>
+        public static TimeRange FromPartial(string partial)
+        {
+            Guard.IsNotNullOrWhiteSpace(partial, "partial");
+
+            partial = partial.Replace(":", "").Replace("-", "");
+
+            // Remove milliseconds.
+            var pi = partial.IndexOf('.');
+            if (pi > 0)
+            {
+                do
+                {
+                    partial = partial.Remove(pi, 1);
+                } while (pi < partial.Length && char.IsDigit(partial[pi]));
+            }
+
+            var styles = (partial.EndsWith("Z") ? DateTimeStyles.AssumeUniversal : DateTimeStyles.AssumeLocal);
+            DateTimeOffset start;
+            if (DateTimeOffset.TryParseExact(partial, "yyyy", CultureInfo.InvariantCulture, styles, out start))
+                return new TimeRange(start, start.AddYears(1));
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMM", CultureInfo.InvariantCulture, styles, out start))
+                return new TimeRange(start, start.AddMonths(1));
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd", CultureInfo.InvariantCulture, styles, out start))
+                return new TimeRange(start, start.AddDays(1));
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMddTHH", CultureInfo.InvariantCulture, styles, out start))
+                return new TimeRange(start, start.AddHours(1));
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmm", CultureInfo.InvariantCulture, styles, out start))
+                return new TimeRange(start, start.AddMinutes(1));
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmmss", CultureInfo.InvariantCulture, styles, out start))
+                return new TimeRange(start, start.AddSeconds(1));
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmmss'Z'", CultureInfo.InvariantCulture, styles, out start))
+                return new TimeRange(start, start.AddSeconds(1));
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmmsszzz", CultureInfo.InvariantCulture, styles, out start))
+                return new TimeRange(start, start.AddSeconds(1));
+
+            throw new FormatException(string.Format("Unknown ISO 8061 date/time '{0}'.", partial));
         }
     }
 }
