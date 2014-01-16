@@ -383,6 +383,10 @@ namespace Sepia
         ///   The precision of the partial date/time is determined and then the upper bound is calculated.  For example,
         ///   "2012" has upper bound of "2013" and "2012-01-14" has upper bound of "2012-01-15".  Precision is down to
         ///   seconds.  All valid ISO forms (2012-01-14T10 or 20120114T10) are allowed.
+        ///   <para>
+        ///   A partial date/time is assumed to be local timezone relative unless
+        ///   a timezone offset is specified.
+        ///   </para>
         /// </remarks>
         public static TimeRange FromPartial(string partial)
         {
@@ -400,23 +404,37 @@ namespace Sepia
                 } while (pi < partial.Length && char.IsDigit(partial[pi]));
             }
 
-            var styles = (partial.EndsWith("Z") ? DateTimeStyles.AssumeUniversal : DateTimeStyles.AssumeLocal);
+            var utc = DateTimeStyles.AssumeLocal;
+            var local = DateTimeStyles.AssumeLocal;
+
             DateTimeOffset start;
-            if (DateTimeOffset.TryParseExact(partial, "yyyy", CultureInfo.InvariantCulture, styles, out start))
+
+            if (DateTimeOffset.TryParseExact(partial, "yyyy", CultureInfo.InvariantCulture, local, out start))
                 return new TimeRange(start, start.AddYears(1));
-            if (DateTimeOffset.TryParseExact(partial, "yyyyMM", CultureInfo.InvariantCulture, styles, out start))
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMM", CultureInfo.InvariantCulture, local, out start))
                 return new TimeRange(start, start.AddMonths(1));
-            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd", CultureInfo.InvariantCulture, styles, out start))
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd", CultureInfo.InvariantCulture, local, out start))
                 return new TimeRange(start, start.AddDays(1));
-            if (DateTimeOffset.TryParseExact(partial, "yyyyMMddTHH", CultureInfo.InvariantCulture, styles, out start))
+
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HH", CultureInfo.InvariantCulture, local, out start))
                 return new TimeRange(start, start.AddHours(1));
-            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmm", CultureInfo.InvariantCulture, styles, out start))
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHZ", CultureInfo.InvariantCulture, utc, out start))
+                return new TimeRange(start, start.AddHours(1));
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHzzz", CultureInfo.InvariantCulture, local, out start))
+                return new TimeRange(start, start.AddHours(1));
+
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmm", CultureInfo.InvariantCulture, local, out start))
                 return new TimeRange(start, start.AddMinutes(1));
-            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmmss", CultureInfo.InvariantCulture, styles, out start))
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmmZ", CultureInfo.InvariantCulture, utc, out start))
+                return new TimeRange(start, start.AddMinutes(1));
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmmzzz", CultureInfo.InvariantCulture, local, out start))
+                return new TimeRange(start, start.AddMinutes(1));
+            
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmmss", CultureInfo.InvariantCulture, local, out start))
                 return new TimeRange(start, start.AddSeconds(1));
-            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmmss'Z'", CultureInfo.InvariantCulture, styles, out start))
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmmssZ", CultureInfo.InvariantCulture, utc, out start))
                 return new TimeRange(start, start.AddSeconds(1));
-            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmmsszzz", CultureInfo.InvariantCulture, styles, out start))
+            if (DateTimeOffset.TryParseExact(partial, "yyyyMMdd'T'HHmmsszzz", CultureInfo.InvariantCulture, local, out start))
                 return new TimeRange(start, start.AddSeconds(1));
 
             throw new FormatException(string.Format("Unknown ISO 8061 date/time '{0}'.", partial));

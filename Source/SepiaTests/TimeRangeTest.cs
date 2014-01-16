@@ -303,11 +303,24 @@ namespace Sepia
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2014-01-01T00:00:00"), TimeRange.FromPartial("2013").EndsOn);
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-02-01T00:00:00"), TimeRange.FromPartial("2013-01").EndsOn);
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-02T00:00:00"), TimeRange.FromPartial("2013-01-01").EndsOn);
+
+            // Assumed local time
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T13:00:00"), TimeRange.FromPartial("2013-01-01T12").EndsOn);
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:31:00"), TimeRange.FromPartial("2013-01-01T12:30").EndsOn);
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:30:11"), TimeRange.FromPartial("2013-01-01T12:30:10").EndsOn);
-            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:30:11Z"), TimeRange.FromPartial("2013-01-01T12:30:10Z").EndsOn);
+
+            // Specified local time
+            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T13:00:00+13:00"), TimeRange.FromPartial("2013-01-01T12+13:00").EndsOn);
+            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:31:00+13:00"), TimeRange.FromPartial("2013-01-01T12:30+13:00").EndsOn);
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:30:11+13:00"), TimeRange.FromPartial("2013-01-01T12:30:10+13:00").EndsOn);
+
+            // UTC time
+            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T13:00:00Z"), TimeRange.FromPartial("2013-01-01T12Z").EndsOn);
+            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:31:00Z"), TimeRange.FromPartial("2013-01-01T12:30Z").EndsOn);
+            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:30:11Z"), TimeRange.FromPartial("2013-01-01T12:30:10Z").EndsOn);
+            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T13:00:00Z"), TimeRange.FromPartial("2013-01-01T12+00:00").EndsOn);
+            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:31:00Z"), TimeRange.FromPartial("2013-01-01T12:30+00:00").EndsOn);
+            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:30:11Z"), TimeRange.FromPartial("2013-01-01T12:30:10+00:00").EndsOn);
 
             // Milliseconds are ignored.
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:30:11"), TimeRange.FromPartial("2013-01-01T12:30:10.0").EndsOn);
