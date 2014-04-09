@@ -156,15 +156,16 @@ namespace Sepia
         }
 
         /// <summary>
-        ///   Determines if the specified <see cref="TimeRange"/> intersects this time range.
+        ///   Determines if the specified <see cref="TimeRange"/> overlaps this time range.
         /// </summary>
         /// <param name="that">The time to check for intersection.</param>
         /// <returns>
         ///   <b>true</b>, if <paramref name="that"/> intersects this time range; otherwise, <b>false</b>.
         /// </returns>
-        public bool Contains(TimeRange that)
+        /// <seealso href="http://stackoverflow.com/questions/325933/determine-whether-two-date-ranges-overlap"/>
+        public bool Intersects(TimeRange that)
         {
-            return this.Contains(that.StartsOn) || this.Contains(that.endsOn);
+           return (this.StartsOn < that.EndsOn) && (that.StartsOn < this.EndsOn);
         }
 
         /// <summary>
@@ -327,7 +328,8 @@ namespace Sepia
         /// </example>
         public static TimeRange ParseIso8061(string s)
         {
-            Guard.IsNotNullOrWhiteSpace(s, "s");
+            if (string.IsNullOrEmpty(s))
+                return new TimeRange(DateTimeOffset.MinValue, DateTimeOffset.MaxValue);
 
             var parts = s.Split('/');
             if (parts.Length != 2)
@@ -370,10 +372,11 @@ namespace Sepia
         }
 
         /// <summary>
-        ///   Determines the upper exclusive bound for a partial date or date/date.
+        ///   Determines the upper exclusive bound for a partial date or date/time.
         /// </summary>
         /// <param name="partial">
-        ///   A valid ISO 8061 partial date/time, such as "2012-01-14", "20120114T10".
+        ///   A valid ISO 8061 partial date/time, such as "2012-01-14", "20120114T10".  If null or empty,
+        ///   then all of time is returned.
         /// </param>
         /// <returns>
         ///   A <see cref="TimeRange"/> with <see cref="TimeRange.EndsOn"/> being the next step for
@@ -438,6 +441,23 @@ namespace Sepia
                 return new TimeRange(start, start.AddSeconds(1));
 
             throw new FormatException(string.Format("Unknown ISO 8061 date/time '{0}'.", partial));
+        }
+
+        /// <summary>
+        ///  A <see cref="TimeRange"/> from the specified ISO 8061 partial date/time.
+        /// </summary>
+        /// <param name="start">
+        ///   The inclusive start time formatted as a valid ISO 8061 partial date/time.
+        /// </param>
+        /// <param name="end">
+        ///   The exclusive end time formatted as a valid ISO 8061 partial date/time.
+        /// </param>
+        /// <exception cref="ArgumentException">When <paramref name="end"/> is not greater than <paramref name="start"/>.</exception>
+        public static TimeRange FromPartial(string start, string end)
+        {
+            return new TimeRange(
+                TimeRange.FromPartial(start).StartsOn,
+                TimeRange.FromPartial(end).EndsOn);
         }
     }
 }

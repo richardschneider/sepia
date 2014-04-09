@@ -331,5 +331,34 @@ namespace Sepia
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:30:11Z"), TimeRange.FromPartial("2013-01-01T12:30:10.999Z").EndsOn);
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:30:11+13:00"), TimeRange.FromPartial("2013-01-01T12:30:10.999999+13:00").EndsOn);
         }
+
+        [TestMethod]
+        public void Intersection()
+        {
+            Assert.IsTrue(TimeRange.FromPartial("2013-02-01").Intersects(TimeRange.FromPartial("2013")));
+            Assert.IsTrue(TimeRange.FromPartial("2013").Intersects(TimeRange.FromPartial("2013-02-01")));
+
+            Assert.IsFalse(TimeRange.FromPartial("2013-02-08", "2013-02-09").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+            Assert.IsTrue(TimeRange.FromPartial("2013-02-08", "2013-02-10").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+            Assert.IsTrue(TimeRange.FromPartial("2013-02-08", "2013-02-11").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+            Assert.IsTrue(TimeRange.FromPartial("2013-02-08", "2013-02-12").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+            Assert.IsTrue(TimeRange.FromPartial("2013-02-08", "2013-02-13").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+
+            Assert.IsFalse(TimeRange.FromPartial("2013-02-08").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+            Assert.IsFalse(TimeRange.FromPartial("2013-02-09").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+            Assert.IsTrue(TimeRange.FromPartial("2013-02-10").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+            Assert.IsTrue(TimeRange.FromPartial("2013-02-11").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+            Assert.IsTrue(TimeRange.FromPartial("2013-02-12").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+            Assert.IsFalse(TimeRange.FromPartial("2013-02-13").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+            Assert.IsFalse(TimeRange.FromPartial("2013-02-14").Intersects(TimeRange.FromPartial("2013-02-10", "2013-02-12")));
+
+            Assert.IsFalse(TimeRange.FromPartial("2013-02-10", "2013-02-12").Intersects(TimeRange.FromPartial("2013-02-08")));
+            Assert.IsFalse(TimeRange.FromPartial("2013-02-10", "2013-02-12").Intersects(TimeRange.FromPartial("2013-02-09")));
+            Assert.IsTrue(TimeRange.FromPartial("2013-02-10", "2013-02-12").Intersects(TimeRange.FromPartial("2013-02-10")));
+            Assert.IsTrue(TimeRange.FromPartial("2013-02-10", "2013-02-12").Intersects(TimeRange.FromPartial("2013-02-11")));
+            Assert.IsTrue(TimeRange.FromPartial("2013-02-10", "2013-02-12").Intersects(TimeRange.FromPartial("2013-02-12")));
+            Assert.IsFalse(TimeRange.FromPartial("2013-02-10", "2013-02-12").Intersects(TimeRange.FromPartial("2013-02-13")));
+            Assert.IsFalse(TimeRange.FromPartial("2013-02-10", "2013-02-12").Intersects(TimeRange.FromPartial("2013-02-14")));
+        }
     }
 }
