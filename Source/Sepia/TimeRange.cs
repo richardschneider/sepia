@@ -390,12 +390,18 @@ namespace Sepia
         ///   A partial date/time is assumed to be local timezone relative unless
         ///   a timezone offset is specified.
         ///   </para>
+        ///   <note>Milliseconds are ignored.</note>
         /// </remarks>
         public static TimeRange FromPartial(string partial)
         {
             Guard.IsNotNullOrWhiteSpace(partial, "partial");
 
-            partial = partial.Replace(":", "").Replace("-", "");
+            // Strip the eye candy from the ISO 8061 date/time.
+            var parts = partial.Split('T');
+            parts[0] = parts[0].Replace("-", "");
+            if (parts.Length > 1)
+                parts[1] = parts[1].Replace(":", "");
+            partial = string.Join("T", parts);
 
             // Remove milliseconds.
             var pi = partial.IndexOf('.');

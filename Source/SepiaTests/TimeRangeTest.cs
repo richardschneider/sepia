@@ -314,6 +314,10 @@ namespace Sepia
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:31:00+13:00"), TimeRange.FromPartial("2013-01-01T12:30+13:00").EndsOn);
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:30:11+13:00"), TimeRange.FromPartial("2013-01-01T12:30:10+13:00").EndsOn);
 
+            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T13:00:00-07:00"), TimeRange.FromPartial("2013-01-01T12-07:00").EndsOn);
+            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:31:00-07:00"), TimeRange.FromPartial("2013-01-01T12:30-07:00").EndsOn);
+            Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:30:11-07:00"), TimeRange.FromPartial("2013-01-01T12:30:10-07:00").EndsOn);
+
             // UTC time
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T13:00:00Z"), TimeRange.FromPartial("2013-01-01T12Z").EndsOn);
             Assert.AreEqual(XmlConvert.ToDateTimeOffset("2013-01-01T12:31:00Z"), TimeRange.FromPartial("2013-01-01T12:30Z").EndsOn);
