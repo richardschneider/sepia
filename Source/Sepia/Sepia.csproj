@@ -95,9 +95,6 @@
     <Compile Include="Calendaring\VTodo.cs" />
     <Compile Include="CircularDependencyException.cs" />
     <Compile Include="ITag.cs" />
-    <Compile Include="Model\BusinessData.cs" />
-    <Compile Include="Model\NamespaceDoc.cs" />
-    <Compile Include="Model\Person.cs" />
     <Compile Include="Schematron\ActivePattern.cs" />
     <Compile Include="Schematron\Annotation.cs" />
     <Compile Include="Schematron\Assertion.cs" />

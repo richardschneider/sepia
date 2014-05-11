@@ -111,7 +111,6 @@
     <Compile Include="TagBagTest.cs" />
     <Compile Include="TypedTagTest.cs" />
     <Compile Include="LanguageTagTest.cs" />
-    <Compile Include="Model\BusinessDataTest.cs" />
     <Compile Include="MultilingualTextTest.cs" />
     <Compile Include="TagTest.cs" />
     <Compile Include="TimeExtensionsTest.cs" />
