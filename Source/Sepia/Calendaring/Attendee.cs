@@ -32,7 +32,7 @@ namespace Sepia.Calendaring
         public Attendee(ContentLine content) : this()
         {
             Guard.IsNotNull(content, "content");
-            Guard.Check(content.Name.Equals("ATTENDEE", StringComparison.InvariantCultureIgnoreCase), "content", "Expected an ATTENDEE content line.");
+            Guard.Require(content.Name.Equals("ATTENDEE", StringComparison.InvariantCultureIgnoreCase), "content", "Expected an ATTENDEE content line.");
 
             MailAddress = content.ToMailAddress();
             if (content.HasParameters)

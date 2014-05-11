@@ -13,7 +13,9 @@ namespace Sepia
         /// <summary>
         ///   Demand that the argument is not null.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">
+        ///   A reference value (<c>class</c> in C#).
+        /// </typeparam>
         /// <param name="x">The argument to test for nullability.</param>
         /// <param name="name">The argument's name.</param>
         /// <exception cref="ArgumentNullException">When <paramref name="x"/> is <b>null</b>.</exception>
@@ -24,7 +26,7 @@ namespace Sepia
         }
 
         /// <summary>
-        ///   Demand that the argument is not null and is not empty and does not exist of whitespace.
+        ///   Demand that the <see cref="string">string argument</see> is not null and is not empty and does not exist of whitespace.
         /// </summary>
         /// <param name="x">The argument to test.</param>
         /// <param name="name">The argument's name.</param>
@@ -52,13 +54,13 @@ namespace Sepia
         }
 
         /// <summary>
-        ///   Check that the precondition is true.
+        ///   Requires that the precondition is true.
         /// </summary>
         /// <param name="condition">The condition to check.</param>
         /// <param name="name">The argument's name</param>
         /// <param name="message">A description of the condition.</param>
         /// <exception cref="ArgumentException">When <paramref name="condition"/> is not <b>true</b>.</exception>
-        public static void Check(bool condition, string name, string message)
+        public static void Require(bool condition, string name, string message)
         {
             if (!condition)
             {
@@ -67,14 +69,14 @@ namespace Sepia
         }
 
         /// <summary>
-        ///   When the predicate is valid, check that the condition is true.
+        ///   When the predicate is valid, require that the condition is true.
         /// </summary>
         /// <param name="predicate">Determines if the <paramref name="condition"/> is checked.</param>
         /// <param name="condition">The condition to check.</param>
         /// <param name="name">The argument's name</param>
         /// <param name="message">A description of the condition.</param>
         /// <exception cref="ArgumentException">When <paramref name="condition"/> is not <b>true</b>.</exception>
-        public static void When(bool predicate, bool condition, string name, string message)
+        public static void RequireWhen(bool predicate, bool condition, string name, string message)
         {
             if (predicate && !condition)
             {

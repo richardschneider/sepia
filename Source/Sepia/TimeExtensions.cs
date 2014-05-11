@@ -195,7 +195,7 @@ namespace Sepia
         /// </remarks>      
         public static IEnumerable<DateTimeOffset> StepBy(this DateTimeOffset start, TimeSpan step)
         {
-            Guard.Check(step != TimeSpan.Zero, "step", "Cannot step by a zero.");
+            Guard.Require(step != TimeSpan.Zero, "step", "Cannot step by a zero.");
 
             var next = start;
             while (true)

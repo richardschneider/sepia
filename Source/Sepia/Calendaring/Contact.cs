@@ -33,7 +33,7 @@ namespace Sepia.Calendaring
         public Contact(ContentLine content) : this()
         {
             Guard.IsNotNull(content, "content");
-            Guard.Check(content.Name.Equals("CONTACT", StringComparison.InvariantCultureIgnoreCase), "content", "Expected a CONTACT content line.");
+            Guard.Require(content.Name.Equals("CONTACT", StringComparison.InvariantCultureIgnoreCase), "content", "Expected a CONTACT content line.");
 
             Text = content.ToText();
             Uri = content.Parameters[ParameterName.AlternativeRepresentation];

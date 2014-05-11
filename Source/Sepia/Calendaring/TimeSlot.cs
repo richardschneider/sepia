@@ -98,7 +98,7 @@ namespace Sepia.Calendaring
         void ReadIcs(ContentLine content)
         {
             Guard.IsNotNull(content, "content");
-            Guard.Check(content.Name.Equals(PropertyName.FreeBusy, StringComparison.InvariantCultureIgnoreCase), "content", "Expected an FREEBUSY content line.");
+            Guard.Require(content.Name.Equals(PropertyName.FreeBusy, StringComparison.InvariantCultureIgnoreCase), "content", "Expected an FREEBUSY content line.");
 
             if (content.HasParameters)
             {

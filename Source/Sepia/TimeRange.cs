@@ -73,7 +73,7 @@ namespace Sepia
         /// <exception cref="ArgumentException">When <paramref name="end"/> is not greater than <paramref name="start"/>.</exception>
         public TimeRange(DateTimeOffset start, DateTimeOffset end)
         {
-            Guard.Check(end > start, "end", "The end time must be greater than the start time.");
+            Guard.Require(end > start, "end", "The end time must be greater than the start time.");
 
             startsOn = start;
             endsOn = end;
@@ -204,7 +204,7 @@ namespace Sepia
         /// </example>
         public IEnumerable<TimeRange> Divide(TimeSpan step)  // TODO: maybe rename to split
         {
-            Guard.Check(step > TimeSpan.Zero, "step", "Cannot step by a zero or negative number.");
+            Guard.Require(step > TimeSpan.Zero, "step", "Cannot step by a zero or negative number.");
 
             var next = startsOn;
             while (next < endsOn)

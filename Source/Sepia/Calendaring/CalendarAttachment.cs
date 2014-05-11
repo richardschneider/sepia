@@ -64,7 +64,7 @@ namespace Sepia.Calendaring
         void ReadIcs(ContentLine content)
         {
             Guard.IsNotNull(content, "content");
-            Guard.Check(content.Name.Equals(PropertyName.Attachment, StringComparison.InvariantCultureIgnoreCase), "content", "Expected an attachment content line.");
+            Guard.Require(content.Name.Equals(PropertyName.Attachment, StringComparison.InvariantCultureIgnoreCase), "content", "Expected an attachment content line.");
 
             ContentType = content.Parameters[ParameterName.FormatType];
             var valueType = content.Parameters["value"];

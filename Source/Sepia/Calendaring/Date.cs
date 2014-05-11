@@ -23,10 +23,10 @@ namespace Sepia.Calendaring
         /// <param name="isDateOnly"></param>
         public Date(DateTime dateTime, string timeZone, bool isDateOnly = false)
         {
-            Guard.When(isDateOnly, dateTime.TimeOfDay == TimeSpan.Zero, "dateTime", "The time component must be zero.");
-            Guard.When(isDateOnly, dateTime.Kind == DateTimeKind.Unspecified, "dateTime", "The DateTime.Kind must be unspecified.");
-            Guard.When(!isDateOnly, dateTime.Kind != DateTimeKind.Unspecified, "dateTime", "The DateTime.Kind must not be unspecified.");
-            Guard.When(dateTime.Kind == DateTimeKind.Utc, timeZone == null, "timeZone", "The time zone must be null for a UTC value.");
+            Guard.RequireWhen(isDateOnly, dateTime.TimeOfDay == TimeSpan.Zero, "dateTime", "The time component must be zero.");
+            Guard.RequireWhen(isDateOnly, dateTime.Kind == DateTimeKind.Unspecified, "dateTime", "The DateTime.Kind must be unspecified.");
+            Guard.RequireWhen(!isDateOnly, dateTime.Kind != DateTimeKind.Unspecified, "dateTime", "The DateTime.Kind must not be unspecified.");
+            Guard.RequireWhen(dateTime.Kind == DateTimeKind.Utc, timeZone == null, "timeZone", "The time zone must be null for a UTC value.");
 
             this.dateTime = dateTime;
             this.timeZone = timeZone;

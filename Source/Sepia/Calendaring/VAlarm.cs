@@ -108,7 +108,7 @@ namespace Sepia.Calendaring
             get { return triggerOn; }
             set
             {
-                Guard.When(value.HasValue, value.HasValue && value.Value.Kind == DateTimeKind.Utc, "TriggerOn", "Must be a UTC relative date time.");
+                Guard.RequireWhen(value.HasValue, value.HasValue && value.Value.Kind == DateTimeKind.Utc, "TriggerOn", "Must be a UTC relative date time.");
  
                 triggerOn = value;
             }

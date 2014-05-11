@@ -57,8 +57,8 @@ namespace Sepia
         [TestMethod]
         public void Check()
         {
-            Guard.Check(true, "foo", "bar");
-            ExceptionAssert.Throws<ArgumentException>(() => Guard.Check(false, "foo", "bar"));
+            Guard.Require(true, "foo", "bar");
+            ExceptionAssert.Throws<ArgumentException>(() => Guard.Require(false, "foo", "bar"));
         }
     }
 }

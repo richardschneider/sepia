@@ -113,7 +113,7 @@ namespace Sepia.Calendaring
         void ReadIcs(ContentLine content)
         {
             Guard.IsNotNull(content, "content");
-            Guard.Check(content.Name.Equals("REQUEST-STATUS", StringComparison.InvariantCultureIgnoreCase), "content", "Expected a REQUEST-STATUS content line.");
+            Guard.Require(content.Name.Equals("REQUEST-STATUS", StringComparison.InvariantCultureIgnoreCase), "content", "Expected a REQUEST-STATUS content line.");
 
             var parts = content.Value.Split(';');
             if (parts.Length > 0)

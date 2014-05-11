@@ -29,7 +29,7 @@ namespace Sepia.Calendaring
         public RelationshipReference(ContentLine content) : this()
         {
             Guard.IsNotNull(content, "content");
-            Guard.Check(content.Name.Equals("RELATED-TO", StringComparison.InvariantCultureIgnoreCase), "content", "Expected a RELATED-TO content line.");
+            Guard.Require(content.Name.Equals("RELATED-TO", StringComparison.InvariantCultureIgnoreCase), "content", "Expected a RELATED-TO content line.");
 
             OtherUri = content.Value;
             if (content.HasParameters)

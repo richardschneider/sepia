@@ -124,7 +124,6 @@ namespace Sepia.Calendaring
             var calendar = VCalendar.ForLocalTimeZone();
             Console.WriteLine(calendar.ToString());
             Assert.IsTrue(calendar.Components.OfType<VTimeZone>().Any());
-            Assert.IsTrue(calendar.Components.OfType<VTimeZone>().First().Adjustments.OfType<StandardChange>().Any());
         }
     }
 }
