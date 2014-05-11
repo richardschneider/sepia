@@ -1,22 +1,6 @@
-EFD - Enterprise for Dummies
-Sepia - Simple Enterprise Patterns in Action or How to stop writing the same code.
+Formerly called EFD - Enterprise for Dummies.  It's now called **Sepia** 
+- Simple Enterprise Patterns in Action.  The subtitle is *How to stop writing the same code.*
 
-TODOs
------
-
-Use MSBuild and/or NANT to build debug and release distributions with documentation and then run the unit tests and maybe even code
-coverage.  Also, look at NUGET.
-
-When we go online, need to sort Web HTML documentation and project stats (code changes, downloads, unit test, code coverage, etc.)
-
-A recurringTime (RFC vCalendar???)
-
-A high performance thread safe in-memory cache.
-
-IOC and service locator patterns.
-
-
-What is the pattern for configuration (system parameters)?
 
 Lessons Learnt
 --------------
@@ -130,3 +114,20 @@ Common Logging is used by Sepia.  This allows the application to select a specif
 Performance Monitoring
 ----------------------
 *TODO*
+
+TODOs
+-----
+
+Use MSBuild and/or NANT to build debug and release distributions with documentation and then run the unit tests and maybe even code
+coverage.  Also, look at NUGET.
+
+When we go online, need to sort Web HTML documentation and project stats (code changes, downloads, unit test, code coverage, etc.)
+
+A recurringTime (RFC vCalendar???)
+
+A high performance thread safe in-memory cache.
+
+IOC and service locator patterns.
+
+
+What is the pattern for configuration (system parameters)?
