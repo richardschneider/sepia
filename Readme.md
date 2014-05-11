@@ -1,12 +1,12 @@
-Formerly called EFD - Enterprise for Dummies.  It's now called **Sepia** 
-- Simple Enterprise Patterns in Action.  The subtitle is *How to stop writing the same code.*
+Formerly called EFD - Enterprise for Dummies.  It's now called **Sepia** - Simple Enterprise Patterns in Action.  The subtitle is *How to stop writing the same code over and over again.*
 
+This library is **not yet ready for prime time**, use at your own peril.  Breaking changes are a given.
 
-Lessons Learnt
+Lessons learnt
 --------------
 
 - Avoid over specification.  Just do what is required.
-- Do not design for the for future, its never turns out to be what you expected
+- Do not design for the for future, its never turns out to be what you expected.
 - Classes should do one and only one thing well.  Rely on other classes to do things you are not interested in.
 - Write documentation.  How else will someone now about your feature or be able to support it.
 - Write unit tests.  They give confidence that the feature is working.  They also raise the confidence level when refactoring.
@@ -16,6 +16,17 @@ Lessons Learnt
 - Avoid null collections.  Its better to return an empty collection.
 - Log everything so that when production failures occurs you can determine what is happening.
 
+Features
+--------
+
+- `Schematron` (ISO/IEC 19757 - Document Schema Definition Languages - Part 3) Rule-based validation for XML.
+- `Calendaring` - Calendaring and Scheduling; based on RFC 5545 - Internet Calendaring and 
+Scheduling Core Object Specification (iCalendar).
+- `Multi-lingual text` - A collection of text that represents the same concept in multiple languages.
+- `Tag` - Object classification.
+- `TimeRange` - Inclusive start and exclusive for `DateTimeOffset`. Also supports a partial date/time.
+- `Guard` - Prevents bad data from entering the system.
+
 Conventions
 -----------
 
@@ -24,7 +35,7 @@ StartsOn, EndsOn, CreatedOn, DeletedOn.
  
 Use the "o" format specifier when converting a time to a string, unless presenting the time to an end user.
 
-Always use Fuzzy comparison unless you are that the two times come from the same clock.  
+-Always use Fuzzy comparison unless you are that the two times come from the same clock.-  
 
 Documentation
 -------------
