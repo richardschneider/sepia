@@ -1,4 +1,4 @@
-Formerly called EFD - Enterprise for Dummies.  It's now called **Sepia** - Simple Enterprise Patterns in Action.  The subtitle is *How to stop writing the same code over and over again.*
+Formerly called EFD *(Enterprise for Dummies)*.  It's now called **Sepia** *(Simple Enterprise Patterns in Action)*.  The subtitle is *How to stop writing the same code over and over again.*
 
 This library is **not yet ready for prime time**, use at your own peril.  Breaking changes are a given.
 
@@ -19,13 +19,13 @@ Lessons learnt
 Features
 --------
 
-- `Schematron` (ISO/IEC 19757 - Document Schema Definition Languages - Part 3) Rule-based validation for XML.
-- `Calendaring` - Calendaring and Scheduling; based on RFC 5545 - Internet Calendaring and 
-Scheduling Core Object Specification (iCalendar).
+- `Schematron` - Rules based validation for XML based on [ISO/IEC 19757 - Document Schema Definition Languages - Part 3](http://www.dsdl.org/).
+- `Calendaring` - Calendaring and Scheduling based on [RFC 5545 - Internet Calendaring and 
+Scheduling Core Object Specification (iCalendar)](http://tools.ietf.org/html/rfc5545).
 - `Multi-lingual text` - A collection of text that represents the same concept in multiple languages.
-- `Tag` - Object classification.
+- `Tag` - A classification system that is not dependent upon an object's properties.
 - `TimeRange` - Inclusive start and exclusive for `DateTimeOffset`. Also supports a partial date/time.
-- `Guard` - Prevents bad data from entering the system.
+- [`Guard`](blob/master/Source/Sepia/Guard.cs) - Prevents bad data from entering the system.
 
 Conventions
 -----------
@@ -55,14 +55,12 @@ Code examples are placed in the SepiaExample project, so that we can verify that
 Immutability
 ------------
 
-http://blogs.msdn.com/b/ericlippert/archive/2007/11/13/immutability-in-c-part-one-kinds-of-immutability.aspx
-
-We want Popsicle immutability
+Eric Lippert talks about immutability in <http://blogs.msdn.com/b/ericlippert/archive/2007/11/13/immutability-in-c-part-one-kinds-of-immutability.aspx>. Sepia supprts **Popsicle** immutability.
 
 Time
 ----
 
-Matt Johnson has a good discussion of calendar vs instantaneous time at http://stackoverflow.com/questions/4331189/datetime-vs-datetimeoffset. 
+Matt Johnson has a good discussion of calendar vs instantaneous time at <http://stackoverflow.com/questions/4331189/datetime-vs-datetimeoffset>. 
 
 We will always use instantaneous time as represented by DateTimeOffset. DateTimeOffset supports UTC which is instantaneous and 
 also records the end user perception of time.  We will simply refer to it as time; not as date-time because a date implies a calendar system.
@@ -117,6 +115,7 @@ The ExceptionAssert.Throws<Exception> can be use to test that a method throws an
 
 XML Comments
 ------------
+*TODO*
 
 Logging
 -------
@@ -129,16 +128,15 @@ Performance Monitoring
 TODOs
 -----
 
-Use MSBuild and/or NANT to build debug and release distributions with documentation and then run the unit tests and maybe even code
+- Use MSBuild and/or NANT to build debug and release distributions with documentation and then run the unit tests and maybe even code
 coverage.  Also, look at NUGET.
 
-When we go online, need to sort Web HTML documentation and project stats (code changes, downloads, unit test, code coverage, etc.)
+- When we go online, need to sort Web HTML documentation and project stats (code changes, downloads, unit test, code coverage, etc.)
 
-A recurringTime (RFC vCalendar???)
+- A recurringTime (RFC vCalendar???)
 
-A high performance thread safe in-memory cache.
+- A high performance thread safe in-memory cache.
 
-IOC and service locator patterns.
+- IOC and service locator patterns.
 
-
-What is the pattern for configuration (system parameters)?
+- What is the pattern for configuration (system parameters)?
