@@ -118,23 +118,23 @@ namespace Sepia
         /// <param name="now">
         ///   The time to compare.
         /// </param>
-        /// <param name="start">The inclusive start time.</param>
-        /// <param name="end">The exclusive end time.</param>
+        /// <param name="inclusiveStart">The inclusive start time.</param>
+        /// <param name="exclusiveEnd">The exclusive end time.</param>
         /// <returns>
         ///   <b>true</b> if <paramref name="now"/> within the specified period; otherwise <b>false</b>.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///   <paramref name="end"/> must be greater than <paramref name="start"/>.
+        ///   <paramref name="exclusiveEnd"/> must be greater than <paramref name="inclusiveStart"/>.
         /// </exception>
         /// <example>
         ///   <code title="Credit Card Check" source="SepiaExamples\TimeExample.cs" region="Credit Card Check" language="C#" />
         /// </example>
-        public static bool IsIn(this DateTimeOffset now, DateTimeOffset start, DateTimeOffset end)
+        public static bool Between(this DateTimeOffset now, DateTimeOffset inclusiveStart, DateTimeOffset exclusiveEnd)
         {
-            if (end <= start)
-                throw new ArgumentOutOfRangeException("end", end.ToString("o"), string.Format("The end must be greater than the start '{0:o}'.", start));
+            if (exclusiveEnd <= inclusiveStart)
+                throw new ArgumentOutOfRangeException("end", exclusiveEnd.ToString("o"), string.Format("The end must be greater than the start '{0:o}'.", inclusiveStart));
 
-            return start <= now && now < end;
+            return inclusiveStart <= now && now < exclusiveEnd;
         }
 
 
@@ -144,23 +144,23 @@ namespace Sepia
         /// <param name="now">
         ///   The time to compare.
         /// </param>
-        /// <param name="start">The inclusive start time.</param>
-        /// <param name="end">The exclusive end time or <b>null</b> for never ending.</param>
+        /// <param name="inclusiveStart">The inclusive start time.</param>
+        /// <param name="exclusiveEnd">The exclusive end time or <b>null</b> for never ending.</param>
         /// <returns>
         ///   <b>true</b> if <paramref name="now"/> within the specified period; otherwise <b>false</b>.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///   <paramref name="end"/> must be greater than <paramref name="start"/>.
+        ///   <paramref name="exclusiveEnd"/> must be greater than <paramref name="inclusiveStart"/>.
         /// </exception>
         /// <example>
         ///   <code title="Credit Card Check" source="SepiaExamples\TimeExample.cs" region="Credit Card Check" language="C#" />
         /// </example>
-        public static bool IsIn(this DateTimeOffset now, DateTimeOffset start, DateTimeOffset? end)
+        public static bool Between(this DateTimeOffset now, DateTimeOffset inclusiveStart, DateTimeOffset? exclusiveEnd)
         {
-            if (end.HasValue && end.Value <= start)
-                throw new ArgumentOutOfRangeException("end", end.Value, string.Format("The end must be greater than the start '{0}'.", start));
+            if (exclusiveEnd.HasValue && exclusiveEnd.Value <= inclusiveStart)
+                throw new ArgumentOutOfRangeException("exclusivEnd", exclusiveEnd.Value, string.Format("The end must be greater than the start '{0}'.", inclusiveStart));
 
-            return start <= now && (!end.HasValue || now < end.Value);
+            return inclusiveStart <= now && (!exclusiveEnd.HasValue || now < exclusiveEnd.Value);
         }
 
         // TODO: FuzzyIsIn

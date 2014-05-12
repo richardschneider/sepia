@@ -15,7 +15,7 @@ namespace Sepia
 
             void CheckValidityAt(DateTimeOffset usedOn)
             {
-                if (!usedOn.IsIn(IssuedOn, ExpiresOn))
+                if (!usedOn.Between(IssuedOn, ExpiresOn))
                     throw new Exception("Invalid credit card.");
             }
         }

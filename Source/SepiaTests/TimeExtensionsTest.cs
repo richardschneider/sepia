@@ -51,25 +51,25 @@ namespace Sepia
             var end = now + TimeSpan.FromSeconds(10);
             var tick = TimeSpan.FromTicks(1);
 
-            Assert.IsTrue(now.IsIn(start, end));
-            Assert.IsTrue(start.IsIn(start, end));
-            Assert.IsFalse(end.IsIn(start, end));
-            Assert.IsTrue((start + tick).IsIn(start, end));
-            Assert.IsFalse((start - tick).IsIn(start, end));
-            Assert.IsFalse((end + tick).IsIn(start, end));
-            Assert.IsTrue((end - tick).IsIn(start, end));
+            Assert.IsTrue(now.Between(start, end));
+            Assert.IsTrue(start.Between(start, end));
+            Assert.IsFalse(end.Between(start, end));
+            Assert.IsTrue((start + tick).Between(start, end));
+            Assert.IsFalse((start - tick).Between(start, end));
+            Assert.IsFalse((end + tick).Between(start, end));
+            Assert.IsTrue((end - tick).Between(start, end));
 
-            ExceptionAssert.Throws<ArgumentOutOfRangeException>(() => now.IsIn(end, start));
+            ExceptionAssert.Throws<ArgumentOutOfRangeException>(() => now.Between(end, start));
 
             DateTimeOffset? neverEnds = null;
             DateTimeOffset? start1 = start;
-            Assert.IsTrue(now.IsIn(start, neverEnds));
-            Assert.IsTrue(start.IsIn(start, neverEnds));
-            Assert.IsTrue((start + tick).IsIn(start, neverEnds));
-            Assert.IsFalse((start - tick).IsIn(start, neverEnds));
-            Assert.IsTrue(DateTimeOffset.MaxValue.IsIn(start, neverEnds));
+            Assert.IsTrue(now.Between(start, neverEnds));
+            Assert.IsTrue(start.Between(start, neverEnds));
+            Assert.IsTrue((start + tick).Between(start, neverEnds));
+            Assert.IsFalse((start - tick).Between(start, neverEnds));
+            Assert.IsTrue(DateTimeOffset.MaxValue.Between(start, neverEnds));
 
-            ExceptionAssert.Throws<ArgumentOutOfRangeException>(() => now.IsIn(end, start1));
+            ExceptionAssert.Throws<ArgumentOutOfRangeException>(() => now.Between(end, start1));
         }
 
     }
