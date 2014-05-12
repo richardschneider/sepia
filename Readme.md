@@ -19,8 +19,8 @@ Lessons learnt
 Features
 --------
 
-- [`Schematron`](./Source/Sepia/Schematron) - Rules based validation for XML based on [ISO/IEC 19757 - Document Schema Definition Languages - Part 3](http://www.dsdl.org/).
-- [`Calendaring`](./Source/Sepia/Calendaring) - Calendaring and Scheduling based on [RFC 5545 - Internet Calendaring and 
+- [`Schematron`](./Source/Sepia/Schematron/) - Rules based validation for XML based on [ISO/IEC 19757 - Document Schema Definition Languages - Part 3](http://www.dsdl.org/).
+- [`Calendaring`](./Source/Sepia/Calendaring/) - Calendaring and Scheduling based on [RFC 5545 - Internet Calendaring and 
 Scheduling Core Object Specification (iCalendar)](http://tools.ietf.org/html/rfc5545).
 - [`Multi-lingual text`](./Source/Sepia/MultilingualText.cs) - A collection of text that represents the same concept in multiple [BCP 47](http://tools.ietf.org/html/bcp47) language tags .
 - [`Tag`](./Source/Sepia/Tag.cs) - A classification system that is not dependent upon an object's properties.
