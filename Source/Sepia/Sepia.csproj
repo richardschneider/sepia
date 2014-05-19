@@ -107,6 +107,7 @@
     <Compile Include="Schematron\NamespaceDefinition.cs" />
     <Compile Include="Schematron\Pattern.cs" />
     <Compile Include="Schematron\Phase.cs" />
+    <Compile Include="Schematron\Queries\XPath2Rewriter.cs" />
     <Compile Include="Schematron\Queries\Xslt2QueryLanguage.cs" />
     <Compile Include="Schematron\Queries\XPath2QueryLanguage.cs" />
     <Compile Include="Schematron\Queries\ExsltQueryLanguage.cs" />
@@ -159,6 +160,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Schematron\Documentation\Rules with XSD.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\xpathparser_585d24ad5e98\XPathParser\XPathParser.csproj">
+      <Project>{a8072758-e8d2-4551-89c2-564bde162403}</Project>
+      <Name>XPathParser</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

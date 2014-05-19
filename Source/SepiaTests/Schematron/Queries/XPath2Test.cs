@@ -41,13 +41,19 @@ namespace Sepia.Schematron.Queries
         public void NumberCompare()
         {
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml("<foo a='1' b='2'/>");
+            doc.LoadXml("<foo a='3'/>");
             XPathNavigator nav = doc.DocumentElement.CreateNavigator();
             var query = QueryLanguage;
             var context = query.CreateMatchContext(null, doc);
 
-            var assert = new Assertion { Test = "/foo[@a < @b]" };
-            Assert.IsTrue(query.Assert(assert, context, nav), assert.Test, "a < b");
+            var assert = new Assertion { Test = "/foo[@a < 20]" };
+            Assert.IsTrue(query.Assert(assert, context, nav), assert.Test, "a < 20");
+
+            assert = new Assertion { Test = "/foo[@a < -1]" };
+            Assert.IsFalse(query.Assert(assert, context, nav), assert.Test, "a < -1");
+
+            assert = new Assertion { Test = "/foo[-1 < @a]" };
+            Assert.IsTrue(query.Assert(assert, context, nav), assert.Test, "-1 < @a");
         }
 
         [TestMethod]

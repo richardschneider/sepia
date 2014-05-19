@@ -72,7 +72,7 @@ namespace CodePlex.XPathParser {
         private Node ParseLocationPath() {
             if (scanner.Kind == LexKind.Slash) {
                 scanner.NextLex();
-                Node opnd = builder.Axis(XPathAxis.Root, XPathNodeType.All, null, null);
+                Node opnd = builder.Axis(XPathAxis.Root, XPathNodeType.Element, null, null);
 
                 if (IsStep(scanner.Kind)) {
                     opnd = builder.JoinStep(opnd, ParseRelativeLocationPath());
