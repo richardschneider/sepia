@@ -112,7 +112,7 @@ namespace Sepia.Schematron.Queries
                      Variable variable = qcontext.variables.Find(ruleContext.Remove(0, 1));
                      if (variable == null)
                          throw new ArgumentException(String.Format("'{0}' is not defined.", ruleContext.Remove(0, 1)));
-                     expression = XPathExpression.Compile(variable.value);
+                     expression = Compile(variable.value);
 
                      if (log.IsDebugEnabled)
                          log.Debug("Binding context " + ruleContext + " to " + variable.value);
@@ -122,7 +122,7 @@ namespace Sepia.Schematron.Queries
                      if (log.IsDebugEnabled)
                          log.Debug("Compiling context " + ruleContext);
 
-                     expression = XPathExpression.Compile(ruleContext);
+                     expression = Compile(ruleContext);
                      rule.QueryExpression = expression;
                  }
              }
@@ -165,7 +165,7 @@ namespace Sepia.Schematron.Queries
                  if (log.IsDebugEnabled)
                      log.Debug("Compiling test " + assertion.Test);
 
-                 expression = XPathExpression.Compile(assertion.Test);
+                 expression = Compile(assertion.Test);
                  assertion.QueryExpression = expression;
              }
              expression.SetContext((QueryContext)context);
@@ -226,7 +226,24 @@ namespace Sepia.Schematron.Queries
          QueryContext qcontext = (QueryContext)context;
          qcontext.variables.PopScope();
       }
-      
+     
+      /// <summary>
+      ///   Compiles the specified xpath expression. 
+      /// </summary>
+      /// <param name="xpath">
+      ///   The string repesentation XPath expression.
+      /// </param>
+      /// <returns>
+      ///   An <see cref="XPathExpression"/>.
+      /// </returns>
+      /// <remarks>
+      ///   Allows other query languages to rewrite the expression as XPath 1.
+      /// </remarks>
+      protected virtual XPathExpression Compile(string xpath)
+      {
+          return XPathExpression.Compile(xpath);
+      }
+
       #endregion
 
       #region IProvider Members
