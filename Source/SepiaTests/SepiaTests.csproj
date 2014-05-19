@@ -87,6 +87,7 @@
     <Compile Include="Schematron\AssertionTest.cs" />
     <Compile Include="Schematron\CompilerTest.cs" />
     <Compile Include="Schematron\DiagnosticTest.cs" />
+    <Compile Include="Schematron\Queries\XPath2RewriterTest.cs" />
     <Compile Include="Schematron\Queries\Xslt2Test.cs" />
     <Compile Include="Schematron\Queries\XPath2Test.cs" />
     <Compile Include="Schematron\Queries\ExsltTest.cs" />
@@ -124,6 +125,10 @@
     <ProjectReference Include="..\Sepia\Sepia.csproj">
       <Project>{D2ACB9E6-9ADA-45F3-9CE1-DD5D41CF5934}</Project>
       <Name>Sepia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\xpathparser_585d24ad5e98\XPathParser\XPathParser.csproj">
+      <Project>{a8072758-e8d2-4551-89c2-564bde162403}</Project>
+      <Name>XPathParser</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

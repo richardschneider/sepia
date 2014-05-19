@@ -288,22 +288,31 @@ namespace CodePlex.XPathParser {
                             colonColon = true;
                             SetSourceIndex(saveSourceIndex);
                         } else {                // "foo:bar", "foo:*" or "foo:?"
-                            string ncName = ScanNCName();
-                            if (ncName != null) {
-                                this.prefix = this.name;
-                                this.name = ncName;
-                                // Look ahead for '(' to determine whether QName can be a FunctionName
-                                saveSourceIndex = curIndex;
-                                SkipSpace();
-                                this.canBeFunction = (curChar == '(');
-                                SetSourceIndex(saveSourceIndex);
-                            } else if (curChar == '*') {
+                            if (curChar == '*')
+                            {
                                 NextChar();
                                 this.prefix = this.name;
                                 this.name = "*";
-                            } else {            // "foo:?" -> OperatorName, NameTest
-                                // Return "foo" and leave ":" to be reported later as an unknown lexeme
-                                SetSourceIndex(saveSourceIndex);
+                            }
+                            else
+                            {
+                                string ncName = ScanNCName();
+                                if (ncName != null)
+                                {
+                                    this.prefix = this.name;
+                                    this.name = ncName;
+                                    // Look ahead for '(' to determine whether QName can be a FunctionName
+                                    saveSourceIndex = curIndex;
+                                    SkipSpace();
+                                    this.canBeFunction = (curChar == '(');
+                                    SetSourceIndex(saveSourceIndex);
+                                }
+                                else
+                                {
+                                    // "foo:?" -> OperatorName, NameTest
+                                    // Return "foo" and leave ":" to be reported later as an unknown lexeme
+                                    SetSourceIndex(saveSourceIndex);
+                                }
                             }
                         }
                     } else {

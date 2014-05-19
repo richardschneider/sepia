@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using CodePlex.XPathParser;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ namespace Sepia.Schematron.Queries
     /// <summary>
     ///   Rewrites an xpath 2 expression into xpath 1.
     /// </summary>
-    class XPath2Rewriter : IXPathBuilder<string> 
+    public class XPath2Rewriter : IXPathBuilder<string> 
     {
         static string[] opStrings = { 
             /* Unknown    */ " Unknown ",
@@ -49,32 +50,64 @@ namespace Sepia.Schematron.Queries
             /*Root             */ "root::"              ,
         };
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool RewriteRequired { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void StartBuild() 
         {
             RewriteRequired = false;
         }
 
-        public string EndBuild(string result) {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string EndBuild(string result)
+        {
             return result;
         }
 
-        public string String(string value) {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string String(string value)
+        {
             return "'" + value + "'";
         }
 
-        public string Number(string value) {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Number(string value)
+        {
             return value;
         }
 
-        public string Operator(XPathOperator op, string left, string right) {
-            Debug.Assert(op != XPathOperator.Union);
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Operator(XPathOperator op, string left, string right)
+        {
+            // TODO: Error parsing exists(@a | @b)
+            if (op == XPathOperator.Union && left == null)
+                return right;
+
             if (op == XPathOperator.UnaryMinus) {
                 return "-" + left;
             }
             
-            // Need to change comparison operator because XPATH 1 only deals with numbers.
+            // Need to change comparison operator because XPath 1 only deals with numbers.
+            // If either operand is a number, then rewrite is not required.
+            double d;
+            if (double.TryParse(left, NumberStyles.AllowLeadingSign|NumberStyles.AllowDecimalPoint|NumberStyles.AllowTrailingWhite, NumberFormatInfo.InvariantInfo, out d)
+             || double.TryParse(right, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowTrailingWhite, NumberFormatInfo.InvariantInfo, out d))
+            {
+                return left + opStrings[(int)op] + right;
+            }
             switch (op)
             {
                 case XPathOperator.Lt:
@@ -94,7 +127,11 @@ namespace Sepia.Schematron.Queries
             }
         }
 
-        public string Axis(XPathAxis xpathAxis, XPathNodeType nodeType, string prefix, string name) {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Axis(XPathAxis xpathAxis, XPathNodeType nodeType, string prefix, string name)
+        {
             if (xpathAxis == XPathAxis.Root && nodeType == XPathNodeType.Element)
                 return "/";
             string nodeTest;
@@ -125,14 +162,22 @@ namespace Sepia.Schematron.Queries
             return axisStrings[(int)xpathAxis] + nodeTest;
         }
 
-        public string JoinStep(string left, string right) {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string JoinStep(string left, string right)
+        {
             if (left.EndsWith("/"))
                 return left + right;
 
             return left + '/' + right;
         }
 
-        public string Predicate(string node, string condition, bool reverseStep) {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Predicate(string node, string condition, bool reverseStep)
+        {
             // TODO: Doesn't work "/foo[...]"    
             //if (!reverseStep) {
                 // In this method we don't know how axis was represented in original XPath and the only 
@@ -143,11 +188,19 @@ namespace Sepia.Schematron.Queries
             return node + '[' + condition + ']';
         }
 
-        public string Variable(string prefix, string name) {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Variable(string prefix, string name)
+        {
             return '$' + QName(prefix, name);
         }
 
-        public string Function(string prefix, string name, IList<string> args) {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Function(string prefix, string name, IList<string> args)
+        {
             string result = QName(prefix, name) + '(';
             for (int i = 0; i < args.Count; i++) {
                 if (i != 0) {

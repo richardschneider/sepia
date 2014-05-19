@@ -69,6 +69,20 @@ namespace Sepia
         }
 
         /// <summary>
+        ///   Requires that the precondition is true.
+        /// </summary>
+        /// <param name="condition">The condition to check.</param>
+        /// <param name="message">A description of the condition.</param>
+        /// <exception cref="InvalidOperationException">When <paramref name="condition"/> is not <b>true</b>.</exception>
+        public static void Require(bool condition, string message)
+        {
+            if (!condition)
+            {
+                throw new InvalidOperationException(message);
+            }
+        }
+
+        /// <summary>
         ///   When the predicate is valid, require that the condition is true.
         /// </summary>
         /// <param name="predicate">Determines if the <paramref name="condition"/> is checked.</param>
