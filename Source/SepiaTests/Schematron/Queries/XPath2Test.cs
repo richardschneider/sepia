@@ -37,6 +37,31 @@ namespace Sepia.Schematron.Queries
             Assert.IsFalse(query.Assert(assert, context, nav), assert.Test);
         }
 
+        [TestMethod]
+        public void NumberCompare()
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml("<foo a='1' b='2'/>");
+            XPathNavigator nav = doc.DocumentElement.CreateNavigator();
+            var query = QueryLanguage;
+            var context = query.CreateMatchContext(null, doc);
+
+            var assert = new Assertion { Test = "/foo[@a < @b]" };
+            Assert.IsTrue(query.Assert(assert, context, nav), assert.Test, "a < b");
+        }
+
+        [TestMethod]
+        public void StringCompare()
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml("<foo a='alpha' b='beta'/>");
+            XPathNavigator nav = doc.DocumentElement.CreateNavigator();
+            var query = QueryLanguage;
+            var context = query.CreateMatchContext(null, doc);
+
+            var assert = new Assertion { Test = "/foo[@a < @b]" };
+            Assert.IsTrue(query.Assert(assert, context, nav), assert.Test, "a < b");
+        }
 
     }
 
