@@ -208,8 +208,8 @@ namespace Sepia.Schematron
             AssertionFailed += handler;
 
          instanceNavigator = instance.CreateNavigator();
-         if (log.IsInfoEnabled)
-             log.Info(string.Format("Validating '{0}'", instanceNavigator.BaseURI ?? "some XML document"));
+         if (log.IsDebugEnabled)
+             log.Debug(string.Format("Validating '{0}'", instanceNavigator.BaseURI ?? "some XML document"));
 
          // Bind to the query language.
          if (!Schematron.Default.QueryLanguages.Providers.ContainsKey(schematron.QueryLanguage))
@@ -262,16 +262,16 @@ namespace Sepia.Schematron
             }
          }
 
-         if (log.IsInfoEnabled)
-            log.Info(String.Format("Schema = '{0}', phase = '{1}'", schematron.Title.ToString(), phaseName));
+         if (log.IsDebugEnabled)
+            log.Debug(String.Format("Schema = '{0}', phase = '{1}'", schematron.Title.ToString(), phaseName));
          if (Start != null)
             Start(this, new SchematronValidationEventArgs(schematron, queryEngine, null, null, null, queryContext, instanceNavigator));
          try
          {
             foreach (Pattern pattern in activePatterns)
             {
-               if (log.IsInfoEnabled)
-                  log.Info(string.Format("Running pattern '{0}'", pattern.Title.ToString()));
+               if (log.IsDebugEnabled)
+                  log.Debug(string.Format("Running pattern '{0}'", pattern.Title.ToString()));
                if (ActivePattern != null)
                   ActivePattern(this, new SchematronValidationEventArgs(schematron, queryEngine, pattern, null, null, queryContext, instanceNavigator));
 
@@ -289,8 +289,8 @@ namespace Sepia.Schematron
                bool q = RunPattern(pattern);
                queryEngine.PopScope(queryContext);
 
-               if (log.IsInfoEnabled)
-                  log.Info(String.Format("Pattern '{0}' {1}", pattern.Title.ToString(), q ? "succeeds" : "fails"));
+               if (log.IsDebugEnabled)
+                  log.Debug(String.Format("Pattern '{0}' {1}", pattern.Title.ToString(), q ? "succeeds" : "fails"));
             }
          }
          finally
