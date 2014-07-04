@@ -31,18 +31,17 @@ Lessons learnt
 Conventions
 -----------
 
-A property containing a time (DateTimeOffset) should be name xOn, where x indicates the usages. Some examples are
-StartsOn, EndsOn, CreatedOn, DeletedOn.
+A property containing a time (DateTimeOffset) should be named *x*On, where *x* indicates the usages. Some examples are StartsOn, EndsOn, CreatedOn, DeletedOn.
  
 Use the "o" format specifier when converting a time to a string, unless presenting the time to an end user.
-
--Always use Fuzzy comparison unless you are that the two times come from the same clock.-  
 
 Documentation
 -------------
 
 The Sepia (.Net) class reference is built by Sandcastle http://shfb.codeplex.com/ using the project file (Source\Sepia.shfbproj).  A compiled HTML is generated at Source\Documentation\Sepia.chm.
 The Source\Documentation\Install_Sepia.bat can be used to install the class reference into Microsoft Help viewer.
+
+> Will be moving to [Nudoq](http://www.nudoq.org) soon.
 
 All methods should use XML commenting tags.
 
