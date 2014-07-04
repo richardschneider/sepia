@@ -12,7 +12,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Reading()
       {
-         SchematronDocument schema = Load("Samples/Let.sch");
+         SchematronDocument schema = Load("Schematron/Samples/Let.sch");
          Assert.AreEqual("number(substring(.,1,2))", schema.Patterns[0].Rules[0].Parameters["hour"]);
          Assert.AreEqual("number(substring(.,4,2))", schema.Patterns[0].Rules[0].Parameters["minute"]);
          Assert.AreEqual("number(substring(.,7,2))", schema.Patterns[0].Rules[0].Parameters["second"]);
@@ -22,7 +22,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Assertions() 
       {
-         SchematronDocument schema = Load("Samples/Let.sch");
+         SchematronDocument schema = Load("Schematron/Samples/Let.sch");
          SchematronValidator validator = new SchematronValidator(schema);
          XmlDocument doc = new XmlDocument();
          doc.LoadXml(
@@ -45,7 +45,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void PhaseAssertions()
       {
-         SchematronDocument schema = Load("Samples/Let.sch");
+         SchematronDocument schema = Load("Schematron/Samples/Let.sch");
          SchematronValidator validator = new SchematronValidator(schema);
          XmlDocument doc = new XmlDocument();
          doc.LoadXml("<times><time>23:10:00</time><time>23:10:50</time></times>");
@@ -59,7 +59,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void OverrideDocumentLet()
       {
-         SchematronDocument schema = Load("Samples/Let.sch");
+         SchematronDocument schema = Load("Schematron/Samples/Let.sch");
          SchematronValidator validator = new SchematronValidator(schema);
          validator.Parameters.Add("maxSec", "10");
          XmlDocument doc = new XmlDocument();

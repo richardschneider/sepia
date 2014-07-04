@@ -12,7 +12,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Reading()
       {
-         SchematronDocument a = Load("Samples/All.sch");
+         SchematronDocument a = Load("Schematron/Samples/All.sch");
 
          Phase phase = a.Phases["min"];
          Assert.IsNotNull(phase);
@@ -34,7 +34,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void ReadingISO()
       {
-         SchematronDocument doc = Load("Samples/AllISO.sch");
+         SchematronDocument doc = Load("Schematron/Samples/AllISO.sch");
          Phase phase = doc.Phases["all"];
          Assert.AreEqual(3, phase.ActivePatterns.Count);
          Assert.AreEqual("all", phase.Annotation.ToString());

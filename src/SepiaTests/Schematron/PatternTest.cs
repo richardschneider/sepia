@@ -12,7 +12,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Reading()
       {
-         SchematronDocument a = Load("Samples/All.sch");
+         SchematronDocument a = Load("Schematron/Samples/All.sch");
          Pattern pattern = a.Patterns[0];
 
          Assert.AreEqual("icon", pattern.Icon);
@@ -30,7 +30,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void ReadingISO()
       {
-         SchematronDocument schema = Load("Samples/AbstractPattern.sch");
+         SchematronDocument schema = Load("Schematron/Samples/AbstractPattern.sch");
 
          Assert.IsTrue(schema.Patterns["requiredAttribute"].IsAbstract, "abstract");
          Assert.AreEqual("requiredAttribute", schema.Patterns["foo1"].BasePatternID);
@@ -42,7 +42,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Abstract()
       {
-         SchematronDocument schema = Load("Samples/AbstractPattern.sch");
+         SchematronDocument schema = Load("Schematron/Samples/AbstractPattern.sch");
          SchematronWriter writer = new SchematronWriter();
          writer.WriteDocument(schema.CompiledDocument, Console.Out);
          SchematronValidator validator = new SchematronValidator(schema);

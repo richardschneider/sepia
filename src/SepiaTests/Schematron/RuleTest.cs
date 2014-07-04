@@ -12,7 +12,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Reading()
       {
-         SchematronDocument a = Load("Samples/All.sch");
+         SchematronDocument a = Load("Schematron/Samples/All.sch");
          Rule r = FindRule(a, "dummy");
          Assert.AreEqual("//dummy", r.Context);
          Assert.AreEqual("dummy", r.ID);
@@ -23,7 +23,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void ReadingISO()
       {
-         SchematronDocument a = Load("Samples/AllISO.sch");
+         SchematronDocument a = Load("Schematron/Samples/AllISO.sch");
          Rule r = FindRule(a, "dummy");
          Assert.AreEqual("//dummy", r.Context);
          Assert.AreEqual("dummy", r.ID);
@@ -39,7 +39,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void ExtendsRule1()
       {
-         SchematronValidator validator = new SchematronValidator(SchematronReader.ReadSchematron("Samples/All.sch"));
+         SchematronValidator validator = new SchematronValidator(SchematronReader.ReadSchematron("Schematron/Samples/All.sch"));
          XmlDocument doc = new XmlDocument();
          doc.LoadXml("<fixed-element name='x1' xmlns='urn:testing'>bad value</fixed-element>");
          ExceptionAssert.Throws<SchematronValidationException>(() => validator.Validate(doc), "/fixed-element must be 'fixed");
@@ -48,7 +48,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void ExtendsRule2()
       {
-         SchematronValidator validator = new SchematronValidator(SchematronReader.ReadSchematron("Samples/All.sch"));
+         SchematronValidator validator = new SchematronValidator(SchematronReader.ReadSchematron("Schematron/Samples/All.sch"));
          XmlDocument doc = new XmlDocument();
          doc.LoadXml("<fixed-element name='X1' xmlns='urn:testing'>fixed</fixed-element>");
          ExceptionAssert.Throws<SchematronValidationException>(() => validator.Validate(doc), "The attribute 'name', of element /fixed-element, is required and must start with 'x'");

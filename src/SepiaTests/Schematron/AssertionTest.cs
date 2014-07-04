@@ -12,7 +12,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Reading()
       {
-         SchematronDocument a = Load("Samples/All.sch");
+         SchematronDocument a = Load("Schematron/Samples/All.sch");
          Rule r = FindRule(a, "foo");
 
          Assertion assert = r.Assertions[0];
@@ -29,7 +29,7 @@ namespace Sepia.Schematron.Tests
       public void ReadingISO()
       {
          SchematronDocument doc = new SchematronDocument();
-         doc.Load("Samples/AllISO.sch");
+         doc.Load("Schematron/Samples/AllISO.sch");
          Assertion a = doc.Patterns["testing"].Rules["foo"].Assertions[0];
          Assert.AreEqual("diag-1", a.Diagnostics);
          Assert.AreEqual("flag", a.Flag);

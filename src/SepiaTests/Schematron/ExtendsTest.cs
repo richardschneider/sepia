@@ -12,7 +12,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Reading()
       {
-         SchematronDocument a = Load("Samples/All.sch");
+         SchematronDocument a = Load("Schematron/Samples/All.sch");
 
          Rule r = FindRule(a, "rule-1");
          Assert.IsFalse(r.HasExtensions);

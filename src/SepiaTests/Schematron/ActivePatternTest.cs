@@ -12,7 +12,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Reading()
       {
-         SchematronDocument doc = Load("Samples/All.sch");
+         SchematronDocument doc = Load("Schematron/Samples/All.sch");
          Assert.AreEqual("testing", doc.Phases["min"].ActivePatterns[0].Pattern);
          Assert.AreEqual("some text", doc.Phases["min"].ActivePatterns[0].Annotation.ToString());
       }

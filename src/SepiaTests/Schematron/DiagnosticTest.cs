@@ -12,7 +12,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Reading()
       {
-         SchematronDocument doc = Load("Samples/All.sch");
+         SchematronDocument doc = Load("Schematron/Samples/All.sch");
          Assert.AreEqual("icon", doc.Diagnostics["diag-1"].Icon);
          Assert.AreEqual("diag-1", doc.Diagnostics["diag-1"].ID);
          Assert.AreEqual("diag # 1", doc.Diagnostics["diag-1"].Message.ToString());
@@ -21,7 +21,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Annotation()
       {
-         SchematronValidator validator = new SchematronValidator(SchematronReader.ReadSchematron("Samples/All.sch"));
+         SchematronValidator validator = new SchematronValidator(SchematronReader.ReadSchematron("Schematron/Samples/All.sch"));
          XmlDocument doc = new XmlDocument();
          doc.LoadXml("<document><a><foobar>x-1</foobar><foobar>x-2</foobar></a></document>");
          errors.Clear();

@@ -13,7 +13,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Reading()
       {
-         SchematronDocument a = SchematronReader.ReadSchematron("Samples/UBL-ApplicationResponse-2.0.sch");
+         SchematronDocument a = SchematronReader.ReadSchematron("Schematron/Samples/UBL-ApplicationResponse-2.0.sch");
          Assert.IsNotNull(a);
       }
 
@@ -21,13 +21,13 @@ namespace Sepia.Schematron.Tests
       [ExpectedException(typeof(XmlSchemaValidationException))]
       public void ReadingBad()
       {
-         SchematronReader.ReadSchematron("Samples/Bad1.sch");
+         SchematronReader.ReadSchematron("Schematron/Samples/Bad1.sch");
       }
 
        [TestMethod]
        public void ReadingAllSamples()
        {
-           foreach (var x in Directory.EnumerateFiles("Samples", "*.sch", SearchOption.AllDirectories))
+           foreach (var x in Directory.EnumerateFiles("Schematron/Samples", "*.sch", SearchOption.AllDirectories))
            {
                Console.WriteLine(x);
                if (Path.GetFileName(x).StartsWith("Bad"))

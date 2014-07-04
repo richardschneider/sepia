@@ -28,7 +28,7 @@ namespace Sepia.Schematron.Tests
   <dog petname='smelly'><ear/><bone/><ear/></dog>
 </dogs>");
          StringBuilder svrl = new StringBuilder();
-         SchematronValidator validator = new SchematronValidator("Samples/Dog.sch");
+         SchematronValidator validator = new SchematronValidator("Schematron/Samples/Dog.sch");
          ValidationReport report = new ValidationReport(validator, svrl);
          validator.Validate(dogs);
          Console.WriteLine(svrl.ToString());
@@ -50,7 +50,7 @@ namespace Sepia.Schematron.Tests
   <dog petname='emanon'><nose/><ear/><bone/></dog>
   <dog petname='smelly'><ear/><bone/><ear/></dog>
 </dogs>");
-         SchematronValidator validator = new SchematronValidator("Samples/Dog.sch");
+         SchematronValidator validator = new SchematronValidator("Schematron/Samples/Dog.sch");
          ValidationReport report = new ValidationReport(validator, Console.Out);
          validator.Validate(dogs);
       }
@@ -64,7 +64,7 @@ namespace Sepia.Schematron.Tests
   <dog petname='spot'><nose/><ear/><bone/><ear/></dog>
 </dogs>");
          StringBuilder svrl = new StringBuilder();
-         SchematronValidator validator = new SchematronValidator("Samples/Dog.sch");
+         SchematronValidator validator = new SchematronValidator("Schematron/Samples/Dog.sch");
          ValidationReport report = new ValidationReport(validator, svrl);
          validator.Validate(dogs);
          Assert.IsFalse(report.HasValidationErrors);
@@ -81,7 +81,7 @@ namespace Sepia.Schematron.Tests
   <dog petname='smelly'><ear/><bone/><ear/></dog>
 </dogs>");
          StringBuilder svrl = new StringBuilder();
-         SchematronValidator validator = new SchematronValidator("Samples/Dog.sch");
+         SchematronValidator validator = new SchematronValidator("Schematron/Samples/Dog.sch");
          ValidationReport report = new ValidationReport(validator, svrl);
          validator.Validate(dogs);
          Assert.IsTrue(report.HasValidationErrors);

@@ -12,7 +12,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Valid()
       {
-         SchematronValidator validator = new SchematronValidator("Samples/Person.Xml.Com.sch");
+         SchematronValidator validator = new SchematronValidator("Schematron/Samples/Person.Xml.Com.sch");
          XmlDocument doc = new XmlDocument();
          doc.LoadXml(
 @"<Person Title='Mr'>
@@ -27,7 +27,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void ElementOrder()
       {
-         SchematronValidator validator = new SchematronValidator("Samples/Person.Xml.Com.sch");
+         SchematronValidator validator = new SchematronValidator("Schematron/Samples/Person.Xml.Com.sch");
          XmlDocument doc = new XmlDocument();
          doc.LoadXml(
 @"<Person Title='Mr'>
@@ -40,7 +40,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void GenderTitle()
       {
-         SchematronValidator validator = new SchematronValidator("Samples/Person.Xml.Com.sch");
+         SchematronValidator validator = new SchematronValidator("Schematron/Samples/Person.Xml.Com.sch");
          XmlDocument doc = new XmlDocument();
          doc.LoadXml(
 @"<Person Title='Mr'>
@@ -53,7 +53,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void ElementMissing()
       {
-         SchematronValidator validator = new SchematronValidator("Samples/Person.Xml.Com.sch");
+         SchematronValidator validator = new SchematronValidator("Schematron/Samples/Person.Xml.Com.sch");
          XmlDocument doc = new XmlDocument();
          doc.LoadXml(
 @"<Person Title='Mr'>
@@ -65,7 +65,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void TitleMissing()
       {
-         SchematronValidator validator = new SchematronValidator("Samples/Person.Xml.Com.sch");
+         SchematronValidator validator = new SchematronValidator("Schematron/Samples/Person.Xml.Com.sch");
          XmlDocument doc = new XmlDocument();
          doc.LoadXml(
 @"<Person>

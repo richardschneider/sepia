@@ -15,7 +15,7 @@ namespace Sepia.Schematron.Queries
       {
          XPathQueryLanguage query = new XPathQueryLanguage();
 
-         SchematronDocument a = Load("Samples/All.sch");
+         SchematronDocument a = Load("Schematron/Samples/All.sch");
          Rule rule = FindRule(a, "foo");
 
          XmlDocument doc;
@@ -42,7 +42,7 @@ namespace Sepia.Schematron.Queries
       {
          XPathQueryLanguage query = new XPathQueryLanguage();
 
-         SchematronDocument a = Load("Samples/All.sch");
+         SchematronDocument a = Load("Schematron/Samples/All.sch");
          Rule rule = FindRule(a, "foo");
          Assertion assertion = (Assertion)rule.Assertions[0];
 
@@ -123,7 +123,7 @@ namespace Sepia.Schematron.Queries
       {
          XPathQueryLanguage query = new XPathQueryLanguage();
 
-         SchematronDocument a = Load("Samples/All.sch");
+         SchematronDocument a = Load("Schematron/Samples/All.sch");
          Rule rule = FindRule(a, "dummy");
          Assertion assertion = (Assertion)rule.Assertions[0];
 

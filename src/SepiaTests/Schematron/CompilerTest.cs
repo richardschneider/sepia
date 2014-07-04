@@ -14,7 +14,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Minimal()
       {
-         SchematronDocument full = SchematronReader.ReadSchematron("Samples/All.sch");
+         SchematronDocument full = SchematronReader.ReadSchematron("Schematron/Samples/All.sch");
          SchematronDocument minimal = new Compiler().Compile(full);
 
          Assert.IsNotNull(minimal);
@@ -29,7 +29,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void RuleExtensions()
       {
-         SchematronDocument full = SchematronReader.ReadSchematron("Samples/All.sch");
+         SchematronDocument full = SchematronReader.ReadSchematron("Schematron/Samples/All.sch");
          SchematronDocument minimal = new Compiler().Compile(full);
 
          Rule r = FindRule(minimal, "rule-4");
@@ -42,7 +42,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void MinimalIsValid()
       {
-         SchematronDocument full = SchematronReader.ReadSchematron("Samples/All.sch");
+         SchematronDocument full = SchematronReader.ReadSchematron("Schematron/Samples/All.sch");
          SchematronDocument minimal = new Compiler().Compile(full);
          StringBuilder schematron = new StringBuilder();
          minimal.Save(schematron);
@@ -61,7 +61,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void CompilingAllSamples()
       {
-          foreach (var x in Directory.EnumerateFiles("Samples", "*.sch", SearchOption.AllDirectories))
+          foreach (var x in Directory.EnumerateFiles("Schematron/Samples", "*.sch", SearchOption.AllDirectories))
           {
               Console.WriteLine(x);
               if (Path.GetFileName(x).StartsWith("Bad"))

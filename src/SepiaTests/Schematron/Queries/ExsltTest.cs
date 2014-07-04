@@ -14,7 +14,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Math()
       {
-         SchematronDocument schema = Load("Samples/Exslt.sch");
+         SchematronDocument schema = Load("Schematron/Samples/Exslt.sch");
          SchematronValidator validator = new SchematronValidator(schema);
          XmlDocument doc = new XmlDocument();
 

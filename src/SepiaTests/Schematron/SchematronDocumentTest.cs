@@ -12,7 +12,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void Reading()
       {
-         SchematronDocument doc = Load("Samples/All.sch");
+         SchematronDocument doc = Load("Schematron/Samples/All.sch");
          Assert.AreEqual("all", doc.DefaultPhase);
          Assert.AreEqual(2, doc.Diagnostics.Count);
          Assert.AreEqual("fpi", doc.Fpi);
@@ -26,7 +26,7 @@ namespace Sepia.Schematron.Tests
          Assert.IsNotNull(doc.Title);
          Assert.AreEqual("some text. some more text.", doc.Annotation.ToString());
 
-         doc = Load("Samples/AllISO.sch");
+         doc = Load("Schematron/Samples/AllISO.sch");
          Assert.AreEqual("all", doc.DefaultPhase);
          Assert.AreEqual(2, doc.Diagnostics.Count);
          Assert.AreEqual("fpi", doc.Fpi);
@@ -45,7 +45,7 @@ namespace Sepia.Schematron.Tests
       [TestMethod]
       public void CompileAllQueryExpressions()
       {
-          var doc = Load("Samples/fhir-atom-modified.sch");
+          var doc = Load("Schematron/Samples/fhir-atom-modified.sch");
           doc.CompileQueryExpressions();
       }
 
