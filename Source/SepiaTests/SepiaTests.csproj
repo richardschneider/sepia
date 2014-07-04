@@ -147,25 +147,58 @@
     <None Include="Schematron\App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schematron\Samples\AbstractPattern.sch" />
-    <None Include="Schematron\Samples\All.sch" />
-    <None Include="Schematron\Samples\AllISO.sch" />
-    <None Include="Schematron\Samples\Arabic.sch" />
-    <None Include="Schematron\Samples\Bad1.sch" />
-    <None Include="Schematron\Samples\DogXPathError.sch" />
-    <None Include="Schematron\Samples\fhir-atom-modified.sch" />
+    <None Include="Schematron\Samples\AbstractPattern.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\All.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\AllISO.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\Arabic.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\Bad1.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\DogXPathError.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\fhir-atom-modified.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Schematron\Samples\Dog.sch">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Schematron\Samples\Exslt.sch" />
-    <None Include="Schematron\Samples\fhir-atom.sch" />
-    <None Include="Schematron\Samples\HisPatient1.sch" />
-    <None Include="Schematron\Samples\Let.sch" />
-    <None Include="Schematron\Samples\Person.Xml.Com.sch" />
-    <None Include="Schematron\Samples\PostalZone.sch" />
-    <None Include="Schematron\Samples\PostalZone.ubl" />
-    <None Include="Schematron\Samples\Schematron-1.5.sch" />
-    <None Include="Schematron\Samples\UBL-ApplicationResponse-2.0.sch" />
+    <None Include="Schematron\Samples\Exslt.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\fhir-atom.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\HisPatient1.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\Let.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\Person.Xml.Com.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\PostalZone.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\PostalZone.ubl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\Schematron-1.5.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schematron\Samples\UBL-ApplicationResponse-2.0.sch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
