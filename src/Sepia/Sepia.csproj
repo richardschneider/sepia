@@ -179,7 +179,7 @@
     <Content Include="Schematron\Documentation\Rules with XSD.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\xpathparser_585d24ad5e98\XPathParser\XPathParser.csproj">
+    <ProjectReference Include="..\xpathparser\XPathParser\XPathParser.csproj">
       <Project>{a8072758-e8d2-4551-89c2-564bde162403}</Project>
       <Name>XPathParser</Name>
     </ProjectReference>
