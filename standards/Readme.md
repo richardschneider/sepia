@@ -1,0 +1,1 @@
+A local cache for some of the standards that Sepia supports.  This is for developers that are temporarily without an internet connection.  All references to a standard in the documentation must refer to the auhtority. 
