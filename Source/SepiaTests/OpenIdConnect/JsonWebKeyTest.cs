@@ -129,5 +129,43 @@ namespace Sepia.OpenIdConnect
             Assert.IsInstanceOfType(securityKey, typeof(SymmetricSecurityKey));
         }
 
+        /// <summary>
+        ///   An secret key can be a security token.
+        /// </summary>
+        [TestMethod]
+        public void SecurityToken_Secret()
+        {
+            var jwk = JObject.Parse(
+                @"{
+                    'kid':'mysecret',
+                    'kty':'oct',
+                    'k':'GawgguFyGrWKav7AX4VKUg'
+                  }
+                ");
+            var token = new JsonWebKey(jwk).ToSecurityToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("mysecret", token.Id);
+            Assert.AreEqual(1, token.SecurityKeys.Count);
+        }
+
+        /// <summary>
+        ///   An secret key can be a security token.
+        /// </summary>
+        [TestMethod]
+        public void SecurityToken_Rsa()
+        {
+            var jwk = JObject.Parse(
+                @"{'kty':'RSA',
+                   'n': '0vx7agoebGcQSuuPiLJXZptN9nndrQmbXEps2aiAFbWhM78LhWx4cbbfAAtVT86zwu1RK7aPFFxuhDR1L6tSoc_BJECPebWKRXjBZCiFV4n3oknjhMstn64tZ_2W-5JsGY4Hc5n9yBXArwl93lqt7_RN5w6Cf0h4QyQ5v-65YGjQR0_FDW2QvzqY368QQMicAtaSqzs8KJZgnYb9c7d0zgdAZHzu6qMQvRL5hajrn1n91CbOpbISD08qNLyrdkt-bFTWhAI4vMQFh6WeZu0fM4lFd2NcRwr3XPksINHaQ-G_xBniIqbw0Ls1jF44-csFCur-kEgU8awapJzKnqDKgw',
+                   'e':'AQAB',
+                   'alg':'RS256',
+                   'kid':'2011-04-29'}
+                ");
+            var token = new JsonWebKey(jwk).ToSecurityToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("2011-04-29", token.Id);
+            Assert.AreEqual(1, token.SecurityKeys.Count);
+        }
+
     }
 }

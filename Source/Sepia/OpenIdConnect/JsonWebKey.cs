@@ -4,6 +4,7 @@ using System.IdentityModel;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Security.Cryptography;
+using System.ServiceModel.Security.Tokens;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
@@ -92,7 +93,6 @@ namespace Sepia.OpenIdConnect
         /// <summary>
         ///   Converts the JSON Web Key (JWK) into a <see cref="SecurityKey"/>.
         /// </summary>
-        /// <returns></returns>
         public SecurityKey ToSecurityKey()
         {
             switch (KeyType)
@@ -118,6 +118,33 @@ namespace Sepia.OpenIdConnect
             }
         }
 
+        /// <summary>
+        ///   Converts the JSON Web Key (JWK) into a <see cref="SecurityToken"/>.
+        /// </summary>
+        public SecurityToken ToSecurityToken()
+        {
+            switch (KeyType)
+            {
+                case "RSA":
+                    var parameters = new RSAParameters
+                    {
+                        Modulus = Base64Url.Decode(Json.Value<string>("n")),
+                        Exponent = Base64Url.Decode(Json.Value<string>("e")),
+                    };
+                    var rsa = new RSACryptoServiceProvider();
+                    rsa.ImportParameters(parameters);
+                    return new RsaSecurityToken(rsa, Id);
+
+                case "oct":
+                    return new BinarySecretSecurityToken(Id, Base64Url.Decode(Json.Value<string>("k")));
+
+                case "EC":
+                    throw new NotSupportedException("Windows Identity Framework (WIF) does not support Elliptical Curves (ECDSA).");
+
+                default:
+                    throw new Exception(string.Format("Unknown key type '{0}'.", KeyType));
+            }
+        }
 
     }
 }

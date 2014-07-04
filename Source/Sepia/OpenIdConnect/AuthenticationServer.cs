@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Principal;
 using System.Text;
 using Common.Logging;
 using Newtonsoft.Json;
@@ -24,6 +26,7 @@ namespace Sepia.OpenIdConnect
 
         Uri identifier;
         HttpClient client;
+        TokenValidationParameters tokenValidationParameters;
 
         /// <summary>
         ///   Creates a new instance of the <see cref="AuthenticationServer"/> class with the default values.
@@ -31,6 +34,7 @@ namespace Sepia.OpenIdConnect
         public AuthenticationServer()
         {
             ConfigurationPath = "/.well-known/openid-configuration";
+            tokenValidationParameters = new TokenValidationParameters();
             client = new HttpClient();
             // TODO: Allow compression.
         }
@@ -61,6 +65,15 @@ namespace Sepia.OpenIdConnect
         }
 
         /// <summary>
+        ///   Signing tokens used by the server.
+        /// </summary>
+        public IEnumerable<SecurityToken> SigningTokens
+        {
+            get { return tokenValidationParameters.SigningTokens;  }
+            set { tokenValidationParameters.SigningTokens = value; }
+        }
+
+        /// <summary>
         ///   The path to the configuration document.
         /// </summary>
         /// <value>
@@ -82,6 +95,7 @@ namespace Sepia.OpenIdConnect
         /// </summary>
         /// <remarks>
         ///   OpenID servers provide a <see cref="Configuration"/> metadata at the <see cref="ConfigurationPath"/>.
+        ///   This can be used to get the <see cref="SigningTokens"/> from the server.
         /// </remarks>
         public void DiscoverConfiguration()
         {
@@ -92,10 +106,21 @@ namespace Sepia.OpenIdConnect
             Configuration.Validate(this);
 
             // Get the JWS keys.
-            var keys = GetDocument(Configuration.KeySetUri)["keys"]
+            SigningTokens = GetDocument(Configuration.KeySetUri)["keys"]
                 .Cast<JObject>()
-                .Select(k => new JsonWebKey(k))
+                .Select(k => new JsonWebKey(k).ToSecurityToken())
                 .ToArray();
+        }
+
+        /// <summary>
+        ///   TODO
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public IPrincipal ValidateToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            return tokenHandler.ValidateToken(token, tokenValidationParameters);
         }
 
         JObject GetDocument(Uri endpoint)

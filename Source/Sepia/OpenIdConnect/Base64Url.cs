@@ -26,6 +26,22 @@ namespace Sepia.OpenIdConnect
         const char Base64UrlCharacter63 = '_';
 
         /// <summary>
+        ///   Encodes the bytes as a Base64 URL encoded string.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string Encode(byte[] value)
+        {
+            Guard.IsNotNull(value, "value");
+
+            string s = Convert.ToBase64String(value); // Regular base64 encoder
+            s = s.Split(Base64PadCharacter)[0]; // Remove any trailing '='s
+            s = s.Replace(Base64Character62, Base64UrlCharacter62); // 62nd char of encoding
+            s = s.Replace(Base64Character63, Base64UrlCharacter63); // 63rd char of encoding
+            return s;
+        }
+
+        /// <summary>
         ///   Decodes the Base64 URL encoded string.
         /// </summary>
         public static byte[] Decode(string value)
