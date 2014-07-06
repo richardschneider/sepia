@@ -1,4 +1,4 @@
-Some types to simplify using [Open ID Connect](http://openid.net/) in a resource server.
+Some types to simplify using [Open ID Connect](http://openid.net/) in a resource server.  Thanks to [IdentityModel extensions to .Net](https://github.com/MSOpenTech/azure-activedirectory-identitymodel-extensions-for-dotnet) this was really simple.
   
 Use the [`Authentication Server`](AuthenticationServer.cs) to define an authentication server, aka Open ID Provider or Token Issuer, 
 that is trusted.  Only the base address of the server is needed.  The end-point `.well-known/openid-configuration`
