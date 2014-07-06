@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens;
-using System.IO;
-using System.Linq;
+using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security.Principal;
-using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Common.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Microsoft.IdentityModel.Protocols;
 
 namespace Sepia.OpenIdConnect
 {
@@ -20,125 +15,72 @@ namespace Sepia.OpenIdConnect
     /// <remarks>
     ///   Also referred to as an OpenID Provider (OP).
     /// </remarks>
-    public class AuthenticationServer
+    public class AuthenticationServer : ConfigurationManager<OpenIdConnectConfiguration>
     {
         static ILog log = LogManager.GetCurrentClassLogger();
-
-        Uri identifier;
-        HttpClient client;
-        TokenValidationParameters tokenValidationParameters;
 
         /// <summary>
         ///   Creates a new instance of the <see cref="AuthenticationServer"/> class with the default values.
         /// </summary>
-        public AuthenticationServer()
-        {
-            ConfigurationPath = "/.well-known/openid-configuration";
-            tokenValidationParameters = new TokenValidationParameters();
-            client = new HttpClient();
-            // TODO: Allow compression.
-        }
-
-        /// <summary>
-        ///   Verifiable identifier for an <b>AuthenticateServer</b>.
-        /// </summary>
-        /// <value>
-        ///    A case sensitive <see cref="Uri"/> using the https scheme that contains scheme, host, 
-        ///    and optionally, port number and path components and no query or fragment components.
-        /// </value>
-        public Uri Identifier 
-        {
-            get
-            {
-                return identifier;
-            }
-            set
-            {
-                Guard.IsNotNull(value, "identifier");
-                Guard.Require(value.IsAbsoluteUri, "identifier", "Must be an absolute URL.");
-                Guard.Require(value.Scheme == "https", "identifier", "The 'https' scheme must be used.");
-                Guard.Require(string.IsNullOrEmpty(value.Query), "identifier", "Query component is not allowed.");
-                Guard.Require(string.IsNullOrEmpty(value.Fragment), "identifier", "Fragment component is not allowed.");
-
-                identifier = value;
-            }
-        }
-
-        /// <summary>
-        ///   Signing tokens used by the server.
-        /// </summary>
-        public IEnumerable<SecurityToken> SigningTokens
-        {
-            get { return tokenValidationParameters.SigningTokens;  }
-            set { tokenValidationParameters.SigningTokens = value; }
-        }
-
-        /// <summary>
-        ///   The path to the configuration document.
-        /// </summary>
-        /// <value>
-        ///   The default value is "/.well-known/openid-configuration".
-        /// </value>
-        public string ConfigurationPath { get; set; }
-
-        /// <summary>
-        ///   Get the metadata associated with the server.
-        /// </summary>
+        /// <param name="baseAddress">
+        ///   The base URL of the Open ID Connect server, such as "https://accounts.google.com".
+        ///   The URL is case sensitive <see cref="Uri"/> using the https scheme that contains scheme, host, 
+        ///   and optionally, port number and path components and no query or fragment components.
+        /// </param>
         /// <remarks>
-        ///   Use the <see cref="DiscoverConfiguration"/> method to initially populate
-        ///   the document.
+        ///   The <see cref="Uri.Scheme"/> must be "https" so that the server's identity can be
+        ///   verified.  This prevents a man-in-the-middle attack.
         /// </remarks>
-        public ConfigurationDocument Configuration { get; set; }
-
-        /// <summary>
-        ///   Retrieve the metadata from the server. 
-        /// </summary>
-        /// <remarks>
-        ///   OpenID servers provide a <see cref="Configuration"/> metadata at the <see cref="ConfigurationPath"/>.
-        ///   This can be used to get the <see cref="SigningTokens"/> from the server.
-        /// </remarks>
-        public void DiscoverConfiguration()
+        public AuthenticationServer(string baseAddress)
+            : base(DiscoveryUrl(baseAddress), DiscoveryClient())
         {
-            Configuration = new ConfigurationDocument
+            AutomaticRefreshInterval = TimeSpan.FromHours(12);
+        }
+
+        static string DiscoveryUrl(string baseAddress)
+        {
+            var uri = new Uri(baseAddress);
+            Guard.Require(uri.IsAbsoluteUri, "identifier", "Must be an absolute URL.");
+            Guard.Require(uri.Scheme == "https", "identifier", "The 'https' scheme must be used.");
+            Guard.Require(string.IsNullOrEmpty(uri.Query), "identifier", "Query component is not allowed.");
+            Guard.Require(string.IsNullOrEmpty(uri.Fragment), "identifier", "Fragment component is not allowed.");
+
+            return new Uri(uri, ".well-known/openid-configuration").ToString();
+        }
+
+        static HttpClient DiscoveryClient()
+        {
+            var handler = new HttpClientHandler
             {
-                Json = GetDocument(new Uri(Identifier, ConfigurationPath))
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
             };
-            Configuration.Validate(this);
-
-            // Get the JWS keys.
-            SigningTokens = GetDocument(Configuration.KeySetUri)["keys"]
-                .Cast<JObject>()
-                .Select(k => new JsonWebKey(k).ToSecurityToken())
-                .ToArray();
+            return new HttpClient(new LoggingHandler(handler));
         }
 
-        /// <summary>
-        ///   TODO
-        /// </summary>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        public IPrincipal ValidateToken(string token)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            return tokenHandler.ValidateToken(token, tokenValidationParameters);
-        }
 
-        JObject GetDocument(Uri endpoint)
+        sealed class LoggingHandler : DelegatingHandler
         {
-            Guard.IsNotNull(endpoint, "endpoint");
-            if (log.IsDebugEnabled)
-                log.Debug("GET " + endpoint.ToString());
-            Guard.Require(endpoint.IsAbsoluteUri, "endpoint", "Must be an absolute URL.");
-            Guard.Require(endpoint.Scheme == "https", "endpoint", "The 'https' scheme must be used.");
-
-            using (Stream s = client.GetStreamAsync(endpoint).Result)
-            using (StreamReader sr = new StreamReader(s))
-            using (JsonReader reader = new JsonTextReader(sr))
+            public LoggingHandler(HttpMessageHandler innerHandler)
             {
-                var serializer = new JsonSerializer();
-                var json = serializer.Deserialize(reader);
-                return (JObject)json;
+                Guard.IsNotNull(innerHandler, "innerHnadler");
+
+                InnerHandler = innerHandler;
             }
+
+            /// <inheritdoc />
+            protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            {
+                if (log.IsDebugEnabled)
+                    log.DebugFormat("{0} {1}", request.Method, request.RequestUri);
+
+                var response = await base.SendAsync(request, cancellationToken);
+                if (log.IsDebugEnabled)
+                    log.DebugFormat("Status {0} to {1}", response.StatusCode, response.RequestMessage.RequestUri);
+
+                return response;
+            }
+
         }
     }
+    
 }
