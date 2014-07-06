@@ -5,14 +5,14 @@ This library is **not yet ready for prime time**, use at your own peril.  Breaki
 Features
 --------
 
-- [`Schematron`](./Source/Sepia/Schematron/) - Rules based validation for XML based on [ISO/IEC 19757 - Document Schema Definition Languages - Part 3](http://www.dsdl.org/).
-- [`Calendaring`](./Source/Sepia/Calendaring/) - Calendaring and Scheduling based on [RFC 5545 - Internet Calendaring and 
+- [`Schematron`](./src/Sepia/Schematron/) - Rules based validation for XML based on [ISO/IEC 19757 - Document Schema Definition Languages - Part 3](http://www.dsdl.org/).
+- [`Calendaring`](./src/Sepia/Calendaring/) - Calendaring and Scheduling based on [RFC 5545 - Internet Calendaring and 
 Scheduling Core Object Specification (iCalendar)](http://tools.ietf.org/html/rfc5545).
-- [`Open ID Connect`](./Source/Sepia/OpenIdConnect/) - Authentication with [OpenID](http://openid.net/developers/specs/). 
-- [`Multi-lingual text`](./Source/Sepia/MultilingualText.cs) - A collection of text that represents the same concept in multiple [BCP 47](http://tools.ietf.org/html/bcp47) language tags .
-- [`Tag`](./Source/Sepia/Tag.cs) - A classification system that is not dependent upon an object's properties.
-- [`TimeRange`](./Source/Sepia/TimeRange.cs) - Inclusive start and exclusive for `DateTimeOffset`. Also supports a partial date/time.
-- [`Guard`](./Source/Sepia/Guard.cs) - Prevents bad data from entering the system.
+- [`Open ID Connect`](./src/Sepia/OpenIdConnect/) - Authentication with [OpenID](http://openid.net/developers/specs/). 
+- [`Multi-lingual text`](./src/Sepia/MultilingualText.cs) - A collection of text that represents the same concept in multiple [BCP 47](http://tools.ietf.org/html/bcp47) language tags .
+- [`Tag`](./src/Sepia/Tag.cs) - A classification system that is not dependent upon an object's properties.
+- [`TimeRange`](./src/Sepia/TimeRange.cs) - Inclusive start and exclusive for `DateTimeOffset`. Also supports a partial date/time.
+- [`Guard`](./src/Sepia/Guard.cs) - Prevents bad data from entering the system.
 
 Lessons learnt
 --------------
