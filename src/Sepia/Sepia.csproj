@@ -158,6 +158,7 @@
     <Compile Include="TypedTag.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="OpenIdConnect\Readme.md" />
     <None Include="packages.config" />
     <None Include="Schematron\Schematron.cd" />
     <EmbeddedResource Include="Schematron\Schemas\Schematron-1.5.sch" />
