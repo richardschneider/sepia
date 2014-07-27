@@ -210,6 +210,14 @@ namespace Sepia.Calendaring
             Assert.AreEqual("geo:37.386013,-122.082932", card.GeographicPositions[0].Value);
         }
 
+        [TestMethod]
+        public void Urls()
+        {
+            var card = new VCard { Urls = { "https://somewhere.org/me.vcf" } };
+            card = WriteAndRead(card);
+            Assert.AreEqual("https://somewhere.org/me.vcf", card.Urls[0].Value);
+        }
+
         VCard WriteAndRead(VCard card)
         {
             var ics1 = new StringWriter();

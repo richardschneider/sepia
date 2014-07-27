@@ -31,6 +31,7 @@ namespace Sepia.Calendaring
             Sources = new List<VCardUri>(0);
             Telephones = new List<VCardString>(0);
             Timezones = new List<VCardString>(0);
+            Urls = new List<VCardUri>(0);
             Version = "4.0";
         }
 
@@ -123,6 +124,11 @@ namespace Sepia.Calendaring
         public List<VCardString> Timezones { get; set; }
 
         /// <summary>
+        ///   URL(s) associated with the entity; blogs, web sites, etc.
+        /// </summary>
+        public List<VCardUri> Urls { get; set; }
+
+        /// <summary>
         ///   Version of the vCard specification used to format this vCard.
         /// </summary>
         /// <value>
@@ -185,6 +191,7 @@ namespace Sepia.Calendaring
                     case "source": Sources.Add(new VCardUri(content)); break;
                     case "tel": Telephones.Add(new VCardString(content)); break;
                     case "tz": Timezones.Add(new VCardString(content)); break;
+                    case "url": Urls.Add(new VCardUri(content)); break;
                     case "version": Version = content.Value; break;
                 }
             }
@@ -247,6 +254,10 @@ namespace Sepia.Calendaring
             foreach (var address in Addresses)
             {
                 ics.Write(address.ToContentLine(new ContentLine { Name = "adr" }));
+            }
+            foreach (var url in Urls)
+            {
+                ics.Write(url.ToContentLine(new ContentLine { Name = "url" }));
             }
             foreach (var photo in Photos)
             {
