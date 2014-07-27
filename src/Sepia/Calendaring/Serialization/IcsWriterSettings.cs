@@ -6,7 +6,7 @@ using System.Text;
 namespace Sepia.Calendaring.Serialization
 {
     /// <summary>
-    ///   The settings for a <see cref="IcsWriter"/>
+    ///   The settings for an <see cref="IcsWriter"/>
     /// </summary>
     public class IcsWriterSettings
     {
@@ -15,7 +15,7 @@ namespace Sepia.Calendaring.Serialization
         /// </summary>
         public IcsWriterSettings()
         {
-            CloseInput = true;
+            CloseOutput = true;
             OctetsPerLine = 75;
         }
 
@@ -26,7 +26,7 @@ namespace Sepia.Calendaring.Serialization
         /// <value>
         ///   The default value is <b>true</b>.
         /// </value>
-        public bool CloseInput { get; set; }
+        public bool CloseOutput { get; set; }
 
         /// <summary>
         ///   The maximum octets that a line may contain.

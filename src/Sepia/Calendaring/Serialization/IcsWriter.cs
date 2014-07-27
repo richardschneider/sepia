@@ -71,7 +71,7 @@ namespace Sepia.Calendaring.Serialization
         ///   Closes the writer.
         /// </summary>
         /// <remarks>
-        ///   If <see cref="IcsWriterSettings.CloseInput"/> is <b>true</b>, then the underlying <see cref="TextWriter"/>
+        ///   If <see cref="IcsWriterSettings.CloseOutput"/> is <b>true</b>, then the underlying <see cref="TextWriter"/>
         ///   is <see cref="TextWriter.Close">closed</see>.
         /// </remarks>
         /// <exception cref="CalendarException">
@@ -82,7 +82,7 @@ namespace Sepia.Calendaring.Serialization
             if (startedComponentNames.Count > 0)
                 throw new CalendarException(string.Format("The component '{0}' is not closed.", startedComponentNames.Peek()));
 
-            if (writer != null && settings != null && settings.CloseInput)
+            if (writer != null && settings != null && settings.CloseOutput)
                 writer.Close();
         }
 
