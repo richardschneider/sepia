@@ -73,6 +73,11 @@ namespace Sepia.Calendaring.Serialization
             ///   The <see cref="Component.Name"/> of a "Summer" seasonal time zone.
             /// </summary>
             public const string DayLight = "DAYLIGHT";
+
+            /// <summary>
+            ///   The <see cref="Component.Name"/> of a vCard.
+            /// </summary>
+            public const string Card = "VCARD";
         }
 
         /// <summary>

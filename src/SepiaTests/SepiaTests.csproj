@@ -81,6 +81,8 @@
     <Compile Include="Calendaring\AttendeeTest.cs" />
     <Compile Include="Calendaring\ContactTest.cs" />
     <Compile Include="Calendaring\CalendarAttachmentTest.cs" />
+    <Compile Include="Calendaring\VCardValueTest.cs" />
+    <Compile Include="Calendaring\VCardTest.cs" />
     <Compile Include="OpenIdConnect\AuthenticationServerTest.cs" />
     <Compile Include="OpenIdConnect\TrustManagerTest.cs" />
     <Compile Include="Calendaring\VTodoTest.cs" />

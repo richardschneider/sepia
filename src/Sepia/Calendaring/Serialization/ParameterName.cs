@@ -26,6 +26,11 @@ namespace Sepia.Calendaring.Serialization
         public const string AlternativeRepresentation = "ALTREP";
 
         /// <summary>
+        ///   An alternative representation for a property value.
+        /// </summary>
+        public const string AlternativeId = "ALTID";
+
+        /// <summary>
         ///   The common name associated with the calendar user; IANA name of "CN".
         /// </summary>
         public const string CommonName = "CN";
@@ -84,6 +89,11 @@ namespace Sepia.Calendaring.Serialization
         public const string ParticipationStatus = "PARTSTAT";
 
         /// <summary>
+        ///   Property identifier.
+        /// </summary>
+        public const string PropertyId = "PID";
+
+        /// <summary>
         ///   Specifies the effective range of a recurrence; IANA name of "RANGE".
         /// </summary>
         public const string Range = "RANGE";
@@ -113,5 +123,15 @@ namespace Sepia.Calendaring.Serialization
         ///   The identifier for the time zone definition for a time component in the property value
         /// </summary>
         public const string TimeZoneId = "TZID";
+
+        /// <summary>
+        ///   A classification.
+        /// </summary>
+        public const string Type = "TYPE";
+
+        /// <summary>
+        ///   The preferred ordering (1 - 100).
+        /// </summary>
+        public const string Preference = "PREF";
     }
 }

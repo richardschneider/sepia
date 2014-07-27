@@ -51,7 +51,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Device" />
     <Reference Include="System.IdentityModel" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=0.1.0.0, Culture=neutral, PublicKeyToken=6471f793d62cb514, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
@@ -83,6 +83,14 @@
     <Compile Include="Calendaring\RelationshipReference.cs" />
     <Compile Include="Calendaring\UserRole.cs" />
     <Compile Include="Calendaring\UserType.cs" />
+    <Compile Include="Calendaring\VCard.cs" />
+    <Compile Include="Calendaring\VCardAddress.cs" />
+    <Compile Include="Calendaring\VCardName.cs" />
+    <Compile Include="Calendaring\VCardDate.cs" />
+    <Compile Include="Calendaring\VCardString.cs" />
+    <Compile Include="Calendaring\VCardUri.cs" />
+    <Compile Include="Calendaring\VCardValue.cs" />
+    <Compile Include="Calendaring\VCardText.cs" />
     <Compile Include="Calendaring\VFreeBusy.cs" />
     <Compile Include="Calendaring\RequestStatus.cs" />
     <Compile Include="Calendaring\VEvent.cs" />

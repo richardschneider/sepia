@@ -7,7 +7,8 @@ Features
 
 - [`Schematron`](./src/Sepia/Schematron/) - Rules based validation for XML based on [ISO/IEC 19757 - Document Schema Definition Languages - Part 3](http://www.dsdl.org/).
 - [`Calendaring`](./src/Sepia/Calendaring/) - Calendaring and Scheduling based on [RFC 5545 - Internet Calendaring and 
-Scheduling Core Object Specification (iCalendar)](http://tools.ietf.org/html/rfc5545).
+Scheduling Core Object Specification (iCalendar)](http://tools.ietf.org/html/rfc5545) and
+[and RFC 6350 - vCard Format Specification](http://tools.ietf.org/html/rfc6350).
 - [`Open ID Connect`](./src/Sepia/OpenIdConnect/) - Authentication with [OpenID](http://openid.net/developers/specs/). 
 - [`Multi-lingual text`](./src/Sepia/MultilingualText.cs) - A collection of text that represents the same concept in multiple [BCP 47](http://tools.ietf.org/html/bcp47) language tags .
 - [`Tag`](./src/Sepia/Tag.cs) - A classification system that is not dependent upon an object's properties.

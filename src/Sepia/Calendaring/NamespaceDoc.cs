@@ -4,7 +4,7 @@ namespace Sepia.Calendaring
 {
     /// <summary>
     ///   Types for Calendaring and Scheduling; based on RFC 5545 - Internet Calendaring and 
-    ///   Scheduling Core Object Specification (iCalendar).
+    ///   Scheduling Core Object Specification (iCalendar) and RFC 6350 - vCard Format Specification.
     ///  <para>
     ///   All <see cref="VCalendar">calendar</see> components start with the letter "V".  For example, <see cref="VEvent"/> refers to the event
     ///   calendar component, <see cref="VTodo"/> refers to the to-do calendar component,
