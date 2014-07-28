@@ -20,6 +20,7 @@ namespace Sepia.Calendaring
         public VCard()
         {
             Addresses = new List<VCardAddress>();
+            Categories = new List<VCardString>(0);
             Emails = new List<VCardString>(0);
             FormattedNames = new List<VCardText>(0);
             GeographicPositions = new List<VCardUri>(0);
@@ -48,6 +49,11 @@ namespace Sepia.Calendaring
         ///   The birth date of the individual.
         /// </summary>
         public VCardDate BirthDate { get; set; }
+
+        /// <summary>
+        ///   Classification, aka tags.
+        /// </summary>
+        public List<VCardString> Categories { get; set; }
 
         /// <summary>
         ///   Email address(es).
@@ -184,6 +190,7 @@ namespace Sepia.Calendaring
                         return;
                     case "adr": Addresses.Add(new VCardAddress(content)); break;
                     case "bday": BirthDate = new VCardDate(content); break;
+                    case "categories": Categories.Add(new VCardString(content)); break;
                     case "email": Emails.Add(new VCardString(content)); break;
                     case "fn": FormattedNames.Add(new VCardText(content)); break;
                     case "gender": Gender = content.Value; break;
@@ -269,6 +276,10 @@ namespace Sepia.Calendaring
             foreach (var url in Urls)
             {
                 ics.Write(url.ToContentLine(new ContentLine { Name = "url" }));
+            }
+            foreach (var category in Categories)
+            {
+                ics.Write(category.ToContentLine(new ContentLine { Name = "categories" }));
             }
             foreach (var photo in Photos)
             {

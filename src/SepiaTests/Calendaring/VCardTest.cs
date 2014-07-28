@@ -187,6 +187,15 @@ namespace Sepia.Calendaring
         }
 
         [TestMethod]
+        public void Categories()
+        {
+            var card = new VCard { Categories = { "travel", "ietf" } };
+            card = WriteAndRead(card);
+            Assert.AreEqual("travel", card.Categories[0].Value);
+            Assert.AreEqual("ietf", card.Categories[1].Value);
+        }
+
+        [TestMethod]
         public void Telephones()
         {
             var card = new VCard { Telephones = { "+64 4 5555555" } };
