@@ -26,6 +26,7 @@ namespace Sepia.Calendaring
             Languages = new List<VCardString>(0);
             Names = new List<VCardName>(0);
             NickNames = new List<VCardText>(0);
+            Notes = new List<VCardText>(0);
             Photos = new List<VCardUri>(0);
             ProductId = this.GetType().Namespace;
             Sources = new List<VCardUri>(0);
@@ -94,6 +95,11 @@ namespace Sepia.Calendaring
         ///   Nickname(s) of the entity.
         /// </summary>
         public List<VCardText> NickNames { get; set; }
+
+        /// <summary>
+        ///   Supplemental information or a comment.
+        /// </summary>
+        public List<VCardText> Notes { get; set; }
 
         /// <summary>
         ///   URL(s) to the image(s) of the entity.
@@ -187,6 +193,7 @@ namespace Sepia.Calendaring
                     case "prodid": ProductId = content.Value; break;
                     case "n": Names.Add(new VCardName(content)); break;
                     case "nickname": NickNames.Add(new VCardText(content)); break;
+                    case "note": Notes.Add(new VCardText(content)); break;
                     case "photo": Photos.Add(new VCardUri(content)); break;
                     case "source": Sources.Add(new VCardUri(content)); break;
                     case "tel": Telephones.Add(new VCardString(content)); break;
@@ -230,6 +237,10 @@ namespace Sepia.Calendaring
             foreach (var nickname in NickNames)
             {
                 ics.Write(nickname.ToContentLine(new ContentLine { Name = "nickname" }));
+            }
+            foreach (var note in Notes)
+            {
+                ics.Write(note.ToContentLine(new ContentLine { Name = "note" }));
             }
             foreach (var email in Emails)
             {

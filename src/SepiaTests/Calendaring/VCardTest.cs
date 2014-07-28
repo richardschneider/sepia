@@ -126,6 +126,14 @@ namespace Sepia.Calendaring
         }
 
         [TestMethod]
+        public void Notes()
+        {
+            var card = new VCard { Notes = { "hello world" } };
+            card = WriteAndRead(card);
+            Assert.AreEqual("hello world", card.Notes[0].Value);
+        }
+
+        [TestMethod]
         public void Photos()
         {
             var card = new VCard { Photos = { "http://www.example.com/pub/photos/jqpublic.gif" } };
