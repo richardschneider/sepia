@@ -593,16 +593,31 @@ namespace Sepia.Calendaring.Serialization
             {
                 foreach (var key in content.Parameters.AllKeys)
                 {
+                    if (content.Parameters.GetValues(key).All(v => string.IsNullOrWhiteSpace(v)))
+                        continue;
+
                     Write(";");
                     Write(key.ToUpperInvariant());
                     string prefix = "=";
                     foreach (var s in content.Parameters.GetValues(key))
                     {
+                        if (string.IsNullOrWhiteSpace(s))
+                            continue;
+
                         Write(prefix);
                         bool quoteIt = s.IndexOfAny(new[] {',', ';', ':'}) >= 0;
+
+                        // Convert newlines into escaped string ("\n").
+                        var v = s.Replace("\r\n", "\n");
+                        if (v.Contains('\n'))
+                        {
+                            quoteIt = true;
+                            v = v.Replace("\n", "\\n");
+                        }
+
                         if (quoteIt)
                             Write("\"");
-                        Write(s);
+                        Write(v);
                         if (quoteIt)
                             Write("\"");
                         prefix = ",";

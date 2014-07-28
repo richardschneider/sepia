@@ -298,7 +298,7 @@ namespace Sepia.Calendaring.Serialization
                     break;
                 s.Append(c);
             }
-            return s.ToString();
+            return s.ToString().Replace("\\n", "\n");
         }
 
     }
