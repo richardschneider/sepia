@@ -32,6 +32,7 @@ namespace Sepia.Calendaring
             if (content.HasParameters)
             {
                 GeographicPositionUrl = content.Parameters["geo"];
+                Label = content.Parameters["label"];
             }
 
             var parts = content.Value.Split(';');
@@ -50,6 +51,11 @@ namespace Sepia.Calendaring
         public string GeographicPositionUrl { get; set; }
 
         /// <summary>
+        ///   Delivery address label.
+        /// </summary>
+        public string Label { get; set; }
+
+        /// <summary>
         ///   Post office box.
         /// </summary>
         public string PostOfficeBox { get; set; }
@@ -65,7 +71,7 @@ namespace Sepia.Calendaring
         public string StreetAddress { get; set; }
 
         /// <summary>
-        ///   State.
+        ///   City.
         /// </summary>
         public string Locality { get; set; }
 
@@ -90,6 +96,8 @@ namespace Sepia.Calendaring
             content = base.ToContentLine(content);
             if (GeographicPositionUrl != null)
                 content.Parameters["geo"] = GeographicPositionUrl;
+            if (Label != null)
+                content.Parameters["label"] = Label;
 
             var s = new StringBuilder();
             var empty = new List<string>(0);

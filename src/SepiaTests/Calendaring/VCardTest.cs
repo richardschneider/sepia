@@ -150,6 +150,7 @@ namespace Sepia.Calendaring
                 {
                     new VCardAddress
                     {
+                        Label = "line 1\nline 2\r\nline 3",
                         GeographicPositionUrl = "geo:12.3457,78.910",
                         StreetAddress = "123 Main Street",
                         Locality = "Any Town",
@@ -160,6 +161,7 @@ namespace Sepia.Calendaring
                 }
             };
             card = WriteAndRead(card);
+            Assert.AreEqual("line 1\nline 2\nline 3", card.Addresses[0].Label);
             Assert.AreEqual("geo:12.3457,78.910", card.Addresses[0].GeographicPositionUrl);
             Assert.AreEqual("123 Main Street", card.Addresses[0].StreetAddress);
             Assert.AreEqual("Any Town", card.Addresses[0].Locality);
